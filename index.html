@@ -1557,11 +1557,6 @@
         // ── STATE ──
         let currentVideo = null;
 
-        // ── INLINED DATA ──
-        const TABLE_DATA = {"season":"2024-25","teams":[{"pos":1,"team":"Liverpool","pld":38,"w":25,"d":9,"l":4,"gf":86,"ga":41,"gd":45,"pts":84},{"pos":2,"team":"Arsenal","pld":38,"w":20,"d":14,"l":4,"gf":69,"ga":34,"gd":35,"pts":74},{"pos":3,"team":"Manchester City","pld":38,"w":21,"d":8,"l":9,"gf":72,"ga":44,"gd":28,"pts":71},{"pos":4,"team":"Chelsea","pld":38,"w":20,"d":9,"l":9,"gf":64,"ga":43,"gd":21,"pts":69},{"pos":5,"team":"Newcastle United","pld":38,"w":20,"d":6,"l":12,"gf":68,"ga":47,"gd":21,"pts":66},{"pos":6,"team":"Aston Villa","pld":38,"w":19,"d":9,"l":10,"gf":58,"ga":51,"gd":7,"pts":66},{"pos":7,"team":"Nottingham Forest","pld":38,"w":19,"d":8,"l":11,"gf":58,"ga":46,"gd":12,"pts":65},{"pos":8,"team":"Brighton","pld":38,"w":16,"d":13,"l":9,"gf":66,"ga":59,"gd":7,"pts":61},{"pos":9,"team":"Bournemouth","pld":38,"w":15,"d":11,"l":12,"gf":58,"ga":46,"gd":12,"pts":56},{"pos":10,"team":"Brentford","pld":38,"w":16,"d":8,"l":14,"gf":66,"ga":57,"gd":9,"pts":56},{"pos":11,"team":"Fulham","pld":38,"w":15,"d":9,"l":14,"gf":54,"ga":54,"gd":0,"pts":54},{"pos":12,"team":"Crystal Palace","pld":38,"w":13,"d":14,"l":11,"gf":51,"ga":51,"gd":0,"pts":53},{"pos":13,"team":"Everton","pld":38,"w":11,"d":15,"l":12,"gf":42,"ga":44,"gd":-2,"pts":48},{"pos":14,"team":"West Ham","pld":38,"w":11,"d":10,"l":17,"gf":46,"ga":62,"gd":-16,"pts":43},{"pos":15,"team":"Manchester United","pld":38,"w":11,"d":9,"l":18,"gf":44,"ga":54,"gd":-10,"pts":42},{"pos":16,"team":"Wolves","pld":38,"w":12,"d":6,"l":20,"gf":54,"ga":69,"gd":-15,"pts":42},{"pos":17,"team":"Tottenham","pld":38,"w":11,"d":5,"l":22,"gf":64,"ga":65,"gd":-1,"pts":38},{"pos":18,"team":"Leicester","pld":38,"w":6,"d":7,"l":25,"gf":33,"ga":80,"gd":-47,"pts":25},{"pos":19,"team":"Ipswich","pld":38,"w":4,"d":10,"l":24,"gf":36,"ga":82,"gd":-46,"pts":22},{"pos":20,"team":"Southampton","pld":38,"w":2,"d":6,"l":30,"gf":26,"ga":86,"gd":-60,"pts":12}]};
-
-        const FIXTURES_DATA = {"season":"2024-25","gameweeks":[{"gameweek":1,"dates":"16-19 August 2024","fixtures":[{"home":"Manchester United","away":"Fulham","score":"1-0","date":"2024-08-16","videos":[{"videoId":"c0ThitdRp3E","title":"Manchester United vs. Fulham | Premier League Highlights | NBC Sports","channel":"NBC Sports","duration":"3:28","geo":"Global","geoBlocked":[],"type":"official"}]},{"home":"Ipswich","away":"Liverpool","score":"0-2","date":"2024-08-17","videos":[{"videoId":"example1","title":"Ipswich 0-2 Liverpool | Full Highlights","channel":"Sky Sports","duration":"11:20","geo":"Global","geoBlocked":[],"type":"official"}]},{"home":"Arsenal","away":"Wolves","score":"2-0","date":"2024-08-17","videos":[]},{"home":"Chelsea","away":"Manchester City","score":"0-2","date":"2024-08-18","videos":[{"videoId":"example3","title":"Chelsea 0-2 Manchester City | Haaland Goals Highlights","channel":"Sky Sports","duration":"11:40","geo":"Global","geoBlocked":[],"type":"official"}]}]},{"gameweek":2,"dates":"24-26 August 2024","fixtures":[{"home":"Manchester City","away":"Ipswich","score":"4-1","date":"2024-08-24","videos":[{"videoId":"example4","title":"Man City 4-1 Ipswich | Haaland Hat-Trick","channel":"Sky Sports","duration":"12:20","geo":"Global","geoBlocked":[],"type":"official"}]},{"home":"Wolves","away":"Chelsea","score":"2-6","date":"2024-08-25","videos":[{"videoId":"example5","title":"Wolves 2-6 Chelsea | Noni Madueke Hat-Trick","channel":"Sky Sports","duration":"13:45","geo":"Global","geoBlocked":[],"type":"official"}]}]},{"gameweek":3,"dates":"31 Aug - 1 Sep 2024","fixtures":[{"home":"Manchester United","away":"Liverpool","score":"0-3","date":"2024-09-01","videos":[{"videoId":"example6","title":"Man Utd 0-3 Liverpool | Dominant Display at Old Trafford","channel":"Sky Sports","duration":"12:05","geo":"Global","geoBlocked":[],"type":"official"}]},{"home":"Brighton","away":"Everton","score":"3-0","date":"2024-08-31","videos":[]}]}]};
-
         // ── NAVIGATION ──
         function showPage(page) {
             document.querySelectorAll('.page').forEach(el => el.classList.remove('visible'));
@@ -1596,8 +1591,7 @@
         }
 
         // ── POPULATE TABLE ──
-        function populateTable() {
-            const data = TABLE_DATA;
+        function populateTable(data) {
 
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
@@ -1662,8 +1656,7 @@
             window.open(url, '_blank', 'noopener');
         }
 
-        function populateFixtures() {
-            const data = FIXTURES_DATA;
+        function populateFixtures(data) {
 
             const container = document.getElementById('gameweeks-container');
             container.innerHTML = '';
@@ -1861,9 +1854,19 @@
         // ════ END THEATRE ════
 
         // ── INIT ──
-        document.addEventListener('DOMContentLoaded', () => {
-            populateTable();
-            populateFixtures();
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const [tableRes, fixturesRes] = await Promise.all([
+                    fetch('data/2024-25-table.json'),
+                    fetch('data/2024-25-fixtures.json')
+                ]);
+                const tableData    = await tableRes.json();
+                const fixturesData = await fixturesRes.json();
+                populateTable(tableData);
+                populateFixtures(fixturesData);
+            } catch (err) {
+                console.error('Failed to load data:', err);
+            }
         });
     </script>
     <!-- ════ THEATRE MODAL ════ -->
