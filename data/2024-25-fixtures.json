@@ -1,0 +1,156 @@
+{
+  "season": "2024-25",
+  "gameweeks": [
+    {
+      "gameweek": 1,
+      "dates": "16-19 August 2024",
+      "fixtures": [
+        {
+          "home": "Manchester United",
+          "away": "Fulham",
+          "score": "1-0",
+          "date": "2024-08-16",
+          "videos": [
+            {
+              "videoId": "c0ThitdRp3E",
+              "title": "Manchester United vs. Fulham | PREMIER LEAGUE HIGHLIGHTS | 8/16/24 | NBC Sports",
+              "channel": "NBC Sports",
+              "duration": "3:28",
+              "thumbnail": "https://i.ytimg.com/vi/c0ThitdRp3E/hqdefault.jpg",
+              "geo": "Global",
+              "geoBlocked": [],
+              "type": "official",
+              "publishedAt": "2024-08-16T23:00:00Z"
+            }
+          ]
+        },
+        {
+          "home": "Ipswich",
+          "away": "Liverpool",
+          "score": "0-2",
+          "date": "2024-08-17",
+          "videos": [
+            {
+              "videoId": "example1",
+              "title": "Ipswich 0-2 Liverpool | Full Highlights",
+              "channel": "Premier League",
+              "duration": "11:20",
+              "thumbnail": "https://i.ytimg.com/vi/example1/hqdefault.jpg",
+              "geo": "Global",
+              "geoBlocked": [],
+              "type": "official",
+              "publishedAt": "2024-08-17T22:00:00Z"
+            }
+          ]
+        },
+        {
+          "home": "Arsenal",
+          "away": "Wolves",
+          "score": "2-0",
+          "date": "2024-08-17",
+          "videos": [
+            {
+              "videoId": "example2",
+              "title": "Arsenal 2-0 Wolves | Match Highlights",
+              "channel": "Premier League",
+              "duration": "10:15",
+              "thumbnail": "https://i.ytimg.com/vi/example2/hqdefault.jpg",
+              "geo": "Global",
+              "geoBlocked": [],
+              "type": "official",
+              "publishedAt": "2024-08-17T22:00:00Z"
+            }
+          ]
+        },
+        {
+          "home": "Chelsea",
+          "away": "Manchester City",
+          "score": "0-2",
+          "date": "2024-08-18",
+          "videos": [
+            {
+              "videoId": "example3",
+              "title": "Chelsea 0-2 Manchester City | Haaland & Kovacic Goals",
+              "channel": "Premier League",
+              "duration": "11:40",
+              "thumbnail": "https://i.ytimg.com/vi/example3/hqdefault.jpg",
+              "geo": "Global",
+              "geoBlocked": [],
+              "type": "official",
+              "publishedAt": "2024-08-18T22:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "gameweek": 2,
+      "dates": "24-26 August 2024",
+      "fixtures": [
+        {
+          "home": "Manchester City",
+          "away": "Ipswich",
+          "score": "4-1",
+          "date": "2024-08-24",
+          "videos": [
+            {
+              "videoId": "example4",
+              "title": "Man City 4-1 Ipswich | Haaland Hat-Trick!",
+              "channel": "Premier League",
+              "duration": "12:20",
+              "thumbnail": "https://i.ytimg.com/vi/example4/hqdefault.jpg",
+              "geo": "Global",
+              "geoBlocked": [],
+              "type": "official",
+              "publishedAt": "2024-08-24T22:00:00Z"
+            }
+          ]
+        },
+        {
+          "home": "Wolves",
+          "away": "Chelsea",
+          "score": "2-6",
+          "date": "2024-08-25",
+          "videos": [
+            {
+              "videoId": "example5",
+              "title": "Wolves 2-6 Chelsea | Noni Madueke Hat-Trick",
+              "channel": "Premier League",
+              "duration": "13:45",
+              "thumbnail": "https://i.ytimg.com/vi/example5/hqdefault.jpg",
+              "geo": "Global",
+              "geoBlocked": [],
+              "type": "official",
+              "publishedAt": "2024-08-25T22:00:00Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "gameweek": 3,
+      "dates": "31 Aug - 1 Sep 2024",
+      "fixtures": [
+        {
+          "home": "Manchester United",
+          "away": "Liverpool",
+          "score": "0-3",
+          "date": "2024-09-01",
+          "videos": [
+            {
+              "videoId": "example6",
+              "title": "Man Utd 0-3 Liverpool | Dominant Display at Old Trafford",
+              "channel": "Premier League",
+              "duration": "12:05",
+              "thumbnail": "https://i.ytimg.com/vi/example6/hqdefault.jpg",
+              "geo": "Global",
+              "geoBlocked": [],
+              "type": "official",
+              "publishedAt": "2024-09-01T22:00:00Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

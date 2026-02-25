@@ -1,0 +1,25 @@
+{
+  "season": "2024-25",
+  "teams": [
+    { "pos": 1, "team": "Liverpool", "pld": 38, "w": 25, "d": 9, "l": 4, "gf": 86, "ga": 41, "gd": 45, "pts": 84 },
+    { "pos": 2, "team": "Arsenal", "pld": 38, "w": 20, "d": 14, "l": 4, "gf": 69, "ga": 34, "gd": 35, "pts": 74 },
+    { "pos": 3, "team": "Manchester City", "pld": 38, "w": 21, "d": 8, "l": 9, "gf": 72, "ga": 44, "gd": 28, "pts": 71 },
+    { "pos": 4, "team": "Chelsea", "pld": 38, "w": 20, "d": 9, "l": 9, "gf": 64, "ga": 43, "gd": 21, "pts": 69 },
+    { "pos": 5, "team": "Newcastle United", "pld": 38, "w": 20, "d": 6, "l": 12, "gf": 68, "ga": 47, "gd": 21, "pts": 66 },
+    { "pos": 6, "team": "Aston Villa", "pld": 38, "w": 19, "d": 9, "l": 10, "gf": 58, "ga": 51, "gd": 7, "pts": 66 },
+    { "pos": 7, "team": "Nottingham Forest", "pld": 38, "w": 19, "d": 8, "l": 11, "gf": 58, "ga": 46, "gd": 12, "pts": 65 },
+    { "pos": 8, "team": "Brighton", "pld": 38, "w": 16, "d": 13, "l": 9, "gf": 66, "ga": 59, "gd": 7, "pts": 61 },
+    { "pos": 9, "team": "Bournemouth", "pld": 38, "w": 15, "d": 11, "l": 12, "gf": 58, "ga": 46, "gd": 12, "pts": 56 },
+    { "pos": 10, "team": "Brentford", "pld": 38, "w": 16, "d": 8, "l": 14, "gf": 66, "ga": 57, "gd": 9, "pts": 56 },
+    { "pos": 11, "team": "Fulham", "pld": 38, "w": 15, "d": 9, "l": 14, "gf": 54, "ga": 54, "gd": 0, "pts": 54 },
+    { "pos": 12, "team": "Crystal Palace", "pld": 38, "w": 13, "d": 14, "l": 11, "gf": 51, "ga": 51, "gd": 0, "pts": 53 },
+    { "pos": 13, "team": "Everton", "pld": 38, "w": 11, "d": 15, "l": 12, "gf": 42, "ga": 44, "gd": -2, "pts": 48 },
+    { "pos": 14, "team": "West Ham", "pld": 38, "w": 11, "d": 10, "l": 17, "gf": 46, "ga": 62, "gd": -16, "pts": 43 },
+    { "pos": 15, "team": "Manchester United", "pld": 38, "w": 11, "d": 9, "l": 18, "gf": 44, "ga": 54, "gd": -10, "pts": 42 },
+    { "pos": 16, "team": "Wolves", "pld": 38, "w": 12, "d": 6, "l": 20, "gf": 54, "ga": 69, "gd": -15, "pts": 42 },
+    { "pos": 17, "team": "Tottenham", "pld": 38, "w": 11, "d": 5, "l": 22, "gf": 64, "ga": 65, "gd": -1, "pts": 38 },
+    { "pos": 18, "team": "Leicester", "pld": 38, "w": 6, "d": 7, "l": 25, "gf": 33, "ga": 80, "gd": -47, "pts": 25 },
+    { "pos": 19, "team": "Ipswich", "pld": 38, "w": 4, "d": 10, "l": 24, "gf": 36, "ga": 82, "gd": -46, "pts": 22 },
+    { "pos": 20, "team": "Southampton", "pld": 38, "w": 2, "d": 6, "l": 30, "gf": 26, "ga": 86, "gd": -60, "pts": 12 }
+  ]
+}

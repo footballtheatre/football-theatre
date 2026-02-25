@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Theatre | English Football Archive</title>
+    <meta name="description" content="Watch English football match highlights from every era. Browse fixtures, discover classic matches, and relive football history.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --tan:        #d4a574;
+            --tan-light:  #e8d5b7;
+            --tan-dim:    #a07a52;
+            --teal:       #7ba3a0;
+            --teal-dark:  #4d7572;
+            --terra:      #c17767;
+            --bg:         #141110;
+            --bg-2:       #1e1a17;
+            --bg-3:       #28231f;
+            --bg-4:       #332d28;
+            --text:       #e8ddd3;
+            --text-2:     #b5a99a;
+            --text-3:     #7a6f65;
+            --border:     #2e2823;
+            --border-2:   #3d3630;
+            --border-3:   #524840;
+        }
+
+        /* ── NOISE TEXTURE ── */
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 0; opacity: 0.6;
+        }
+
+        /* ── SCANLINES ── */
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent, transparent 3px,
+                rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px
+            );
+            pointer-events: none; z-index: 0;
+        }
+
+        body {
+            font-family: 'Fraunces', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.65;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative; z-index: 1;
+        }
+
+        /* ── HEADER ── */
+        .site-header {
+            padding: 28px 0;
+            border-bottom: 1px solid var(--border-2);
+            position: relative; z-index: 10;
+        }
+
+        .site-header .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 44px; height: 44px;
+            background: var(--bg-3);
+            border: 1px solid var(--border-3);
+            border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: border-color 0.2s;
+            overflow: hidden;
+        }
+
+        .logo:hover .logo-icon { border-color: var(--tan); }
+
+        .logo-tv {
+            width: 32px; height: 28px;
+            position: relative;
+        }
+
+        .logo-tv-frame {
+            width: 100%; height: 100%;
+            border: 2px solid var(--tan);
+            border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-2);
+        }
+
+        .logo-tv-pitch {
+            width: 18px; height: 14px;
+            border: 1.5px solid var(--teal);
+            border-radius: 1px;
+            position: relative;
+        }
+
+        .logo-tv-pitch::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 5px; height: 5px;
+            border: 1px solid var(--teal);
+            border-radius: 50%;
+        }
+
+        .logo-tv-pitch::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 0; right: 0;
+            height: 1px;
+            background: var(--teal);
+        }
+
+        .logo-wordmark {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tan);
+            letter-spacing: -0.01em;
+            line-height: 1;
+        }
+
+        .logo-tagline {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-top: 3px;
+        }
+
+        .logo:hover .logo-name { color: var(--tan-light); }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            background: none;
+            border: 1px solid transparent;
+            padding: 7px 16px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--tan);
+            border-color: var(--border-3);
+            background: var(--bg-2);
+        }
+
+        .nav-btn.active {
+            color: var(--tan);
+            border-color: var(--tan-dim);
+        }
+
+        /* ── PAGE TRANSITIONS ── */
+        .page { display: none; animation: fadeIn 0.25s ease; }
+        .page.visible { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── HOME HERO ── */
+        .hero {
+            padding: 80px 0 56px;
+            text-align: center;
+        }
+
+        .hero-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .hero-eyebrow::before, .hero-eyebrow::after {
+            content: '';
+            height: 1px;
+            width: 40px;
+            background: var(--teal-dark);
+        }
+
+        .hero-title {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--tan);
+            letter-spacing: -0.02em;
+            line-height: 0.95;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--tan-light);
+            font-weight: 300;
+        }
+
+        .hero-sub {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-3);
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .hero-sub .cursor {
+            display: inline-block;
+            width: 7px; height: 14px;
+            background: var(--teal);
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-2);
+            max-width: 520px;
+            margin: 0 auto 48px;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* ── SEASONS ── */
+        .seasons-heading {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-3);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .seasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 56px;
+        }
+
+        .season-card {
+            background: var(--bg-2);
+            border: 1px solid var(--border-2);
+            padding: 28px 28px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 3px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .season-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--tan), var(--teal));
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .season-card:hover::before { opacity: 1; }
+        .season-card:hover {
+            border-color: var(--border-3);
+            background: var(--bg-3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+
+        .season-card.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .season-year {
+            font-family: 'Fraunces', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--tan);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .season-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-3);
+            margin-bottom: 18px;
+        }
+
+        .season-champion {
+            font-size: 0.95rem;
+            color: var(--text-2);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .champion-badge {
+            font-size: 0.75rem;
+            color: var(--tan);
+        }
+
+        .season-stats {
+            display: flex;
+            gap: 20px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-3);
+            letter-spacing: 0.05em;
+            border-top: 1px solid var(--border);
+            padding-top: 14px;
+        }
+
+        /* ── INFO BOX ── */
+        .info-box {
+            background: var(--bg-2);
+            border: 1px solid var(--border-2);
+            border-left: 3px solid var(--teal-dark);
+            padding: 24px 28px;
+            margin-bottom: 32px;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .info-box h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--tan);
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: var(--text-2);
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .info-box p:last-child { margin-bottom: 0; }
+
+        /* ── SEASON PAGE TABS ── */
+        .season-header {
+            padding: 40px 0 0;
+        }
+
+        .page-kicker {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--teal);
+            margin-bottom: 8px;
+        }
+
+        .page-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--tan);
+            letter-spacing: -0.01em;
+            margin-bottom: 32px;
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border-2);
+            margin-bottom: 40px;
+        }
+
+        .tab {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all 0.18s;
+            margin-bottom: -1px;
+        }
+
+        .tab:hover { color: var(--text-2); }
+
+        .tab.active {
+            color: var(--tan);
+            border-bottom-color: var(--tan);
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.visible { display: block; }
+
+        /* ── LEAGUE TABLE ── */
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--tan);
+            margin-bottom: 20px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-2);
+            border-radius: 3px;
+        }
+
+        .league-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-2);
+        }
+
+        .league-table thead {
+            background: var(--bg-3);
+            position: sticky; top: 0;
+        }
+
+        .league-table th {
+            padding: 11px 14px;
+            text-align: left;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-3);
+            border-bottom: 1px solid var(--border-2);
+            white-space: nowrap;
+        }
+
+        .league-table td {
+            padding: 11px 14px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.82rem;
+            color: var(--text-2);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .league-table tbody tr:last-child td { border-bottom: none; }
+
+        .league-table tbody tr {
+            transition: background 0.12s;
+        }
+
+        .league-table tbody tr:hover { background: var(--bg-3); }
+
+        .td-team { font-family: 'Fraunces', serif; font-weight: 600; color: var(--text); font-size: 0.92rem; }
+        .td-pos { font-weight: 700; }
+        .td-pts { font-weight: 700; color: var(--tan); }
+        .td-pos-champions { color: var(--tan); }
+        .td-pos-ucl { color: var(--teal); }
+        .td-pos-euro { color: var(--terra); }
+        .td-pos-rel { color: #c17767; }
+
+        .pos-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pos-bar {
+            display: block;
+            flex-shrink: 0;
+            width: 3px; height: 16px;
+            border-radius: 2px;
+        }
+        .pos-bar-champions { background: var(--tan); }
+        .pos-bar-ucl       { background: var(--teal); }
+        .pos-bar-euro      { background: var(--terra); }
+        .pos-bar-rel       { background: #c17767; }
+        .pos-bar-none      { background: transparent; }
+
+        /* ── LEGEND ── */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-3);
+            padding: 16px 20px;
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            margin-bottom: 40px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── GAMEWEEKS ── */
+        .gw-section {
+            margin-bottom: 32px;
+        }
+
+        .gw-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .gw-number {
+            font-family: 'Fraunces', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--tan);
+        }
+
+        .gw-dates {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* ── FIXTURE ── */
+        .fixture {
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            margin-bottom: 8px;
+            border-radius: 3px;
+            overflow: hidden;
+            transition: border-color 0.18s;
+        }
+
+        .fixture:hover { border-color: var(--border-3); }
+        .fixture.expanded { border-color: var(--border-3); }
+
+        .fixture-main {
+            padding: 18px 20px;
+            cursor: pointer;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .fixture-date-line {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            grid-column: 1 / -1;
+            margin-bottom: 4px;
+        }
+
+        .fx-home, .fx-away {
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .fx-away { text-align: right; }
+
+        .fx-score {
+            font-family: 'DM Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--tan);
+            letter-spacing: 0.1em;
+            text-align: center;
+            padding: 0 8px;
+        }
+
+        .fx-meta {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .video-pill {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--teal);
+            border: 1px solid var(--teal-dark);
+            padding: 3px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .video-pill::before {
+            content: '▸ ';
+        }
+
+        .expand-icon {
+            font-size: 0.75rem;
+            color: var(--text-3);
+            transition: transform 0.2s;
+        }
+
+        .fixture.expanded .expand-icon { transform: rotate(90deg); }
+
+        /* ── VIDEO LIST ── */
+        .video-list {
+            display: none;
+            padding: 0 20px 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .fixture.expanded .video-list { display: block; }
+
+        .video-list-header {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-3);
+            padding: 14px 0 10px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .video-item {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+        }
+
+        .video-item:last-child { margin-bottom: 0; }
+
+        .video-item-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 10px;
+        }
+
+        .video-title {
+            font-family: 'Fraunces', serif;
+            font-size: 0.92rem;
+            color: var(--text);
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .watch-btn {
+            background: var(--tan);
+            color: var(--bg);
+            border: none;
+            padding: 6px 18px;
+            border-radius: 2px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.15s;
+            flex-shrink: 0;
+        }
+
+        .watch-btn:hover {
+            background: var(--tan-light);
+            transform: translateY(-1px);
+        }
+
+        .video-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 2px 8px;
+            border-radius: 2px;
+            border: 1px solid currentColor;
+        }
+
+        .badge-official { color: var(--tan); background: rgba(212,165,116,0.08); }
+        .badge-global   { color: var(--teal); background: rgba(123,163,160,0.08); }
+        .badge-blocked  { color: var(--terra); background: rgba(193,119,103,0.08); }
+        .badge-channel  { color: var(--text-3); border-color: var(--border-2); }
+        .badge-duration { color: var(--text-3); border-color: var(--border-2); }
+
+        /* ── EMBED ── */
+        .video-embed {
+            display: none;
+            margin-top: 10px;
+            border-radius: 3px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid var(--border-2);
+        }
+
+        .video-embed.active { display: block; }
+
+        .video-embed iframe {
+            width: 100%;
+            height: 380px;
+            border: none;
+            display: block;
+        }
+
+        /* ════════════════════════════════
+           THEATRE MODAL
+           To revert: delete everything between
+           these comments and change watch-btn
+           onclick back to playVideo()
+        ════════════════════════════════ */
+
+        .theatre-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(10, 8, 7, 0.96);
+            backdrop-filter: blur(4px);
+            animation: backdropIn 0.3s ease;
+        }
+
+        .theatre-backdrop.open { display: flex; flex-direction: column; }
+
+        @keyframes backdropIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Top bar */
+        .theatre-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            flex-shrink: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .theatre-match {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .theatre-teams {
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theatre-score {
+            font-family: 'DM Mono', monospace;
+            font-size: 1rem;
+            color: var(--tan);
+            font-weight: 700;
+        }
+
+        .theatre-meta {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .theatre-close {
+            background: none;
+            border: 1px solid var(--border-3);
+            color: var(--text-3);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 8px 18px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.15s;
+            flex-shrink: 0;
+        }
+
+        .theatre-close:hover {
+            color: var(--text);
+            border-color: var(--text-3);
+        }
+
+        /* Screen area */
+        .theatre-screen-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            min-height: 0;
+        }
+
+        .theatre-screen {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            animation: screenIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes screenIn {
+            from { opacity: 0; transform: scale(0.96) translateY(12px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* CRT TV frame */
+        .theatre-tv {
+            background: #0a0806;
+            border: 3px solid #2a2420;
+            border-radius: 12px;
+            padding: 14px 14px 10px;
+            box-shadow:
+                0 0 0 1px #1a1614,
+                0 0 60px rgba(212, 165, 116, 0.06),
+                0 32px 80px rgba(0, 0, 0, 0.8),
+                inset 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Subtle screen glow */
+        .theatre-tv::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                rgba(212,165,116,0.04) 0%,
+                transparent 50%,
+                rgba(123,163,160,0.03) 100%
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Scanline overlay on the video */
+        .theatre-tv::after {
+            content: '';
+            position: absolute;
+            inset: 14px 14px 10px;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(0,0,0,0.08) 3px,
+                rgba(0,0,0,0.08) 4px
+            );
+            pointer-events: none;
+            z-index: 3;
+            border-radius: 6px;
+        }
+
+        .theatre-video-container {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 */
+            border-radius: 6px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .theatre-video-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* TV chin / bottom strip */
+        .theatre-tv-chin {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 4px 2px;
+        }
+
+        .theatre-channel {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .theatre-indicator {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .theatre-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--terra);
+            box-shadow: 0 0 6px var(--terra);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+
+        .theatre-dot-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--terra);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Source switcher */
+        .theatre-sources {
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px 20px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .theatre-source-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-right: 4px;
+        }
+
+        .theatre-source-btn {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            background: none;
+            border: 1px solid var(--border-2);
+            color: var(--text-3);
+            padding: 5px 14px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .theatre-source-btn:hover {
+            border-color: var(--border-3);
+            color: var(--text-2);
+        }
+
+        .theatre-source-btn.active {
+            background: var(--bg-3);
+            border-color: var(--tan-dim);
+            color: var(--tan);
+        }
+
+        @media (max-width: 640px) {
+            .theatre-screen-wrap { padding: 12px; }
+            .theatre-bar { padding: 12px 16px; }
+            .theatre-teams { font-size: 0.9rem; }
+            .theatre-sources { padding: 0 16px 16px; }
+        }
+
+        /* ════ END THEATRE MODAL ════ */
+
+        /* ── EMPTY STATE ── */
+        .fixture.no-video {
+            opacity: 0.55;
+            cursor: default;
+        }
+
+        .fixture.no-video:hover {
+            border-color: var(--border);
+            opacity: 0.7;
+        }
+
+        .fixture.no-video .fixture-main { cursor: default; }
+
+        .no-footage-pill {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-3);
+            border: 1px solid var(--border-2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .empty-state {
+            padding: 20px 20px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .empty-state-msg {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-3);
+            font-style: italic;
+        }
+
+        /* ── SUGGEST LINK ── */
+        .suggest-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--teal-dark);
+            text-decoration: none;
+            border: 1px solid var(--teal-dark);
+            padding: 4px 12px;
+            border-radius: 2px;
+            transition: all 0.15s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .suggest-link:hover {
+            color: var(--teal);
+            border-color: var(--teal);
+            background: rgba(123,163,160,0.06);
+        }
+
+        .suggest-link::before { content: '+ '; }
+
+        .video-list-footer {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* ── ABOUT ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 640px) {
+            .about-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── SUMMARY CARDS ── */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-2);
+            border: 1px solid var(--border-2);
+            border-radius: 3px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--tan), transparent);
+            opacity: 0.4;
+        }
+
+        .stat-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-3);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tan);
+            margin-bottom: 4px;
+        }
+
+        .stat-detail {
+            font-size: 0.88rem;
+            color: var(--text-2);
+            font-style: italic;
+        }
+
+        /* ── LOADING ── */
+        .loading {
+            text-align: center;
+            padding: 48px 0;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-3);
+            letter-spacing: 0.1em;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.2s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20%  { content: '.';   }
+            40%      { content: '..';  }
+            60%, 100%{ content: '...'; }
+        }
+
+        /* ── FOOTER ── */
+        .site-footer {
+            margin-top: 80px;
+            padding: 32px 0;
+            border-top: 1px solid var(--border);
+            position: relative; z-index: 1;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-3);
+            letter-spacing: 0.04em;
+        }
+
+        .footer-copy { }
+        .footer-links { text-align: right; }
+        .footer-about-link {
+            cursor: pointer;
+            color: var(--text-3);
+            transition: color 0.15s;
+        }
+        .footer-about-link:hover { color: var(--tan); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .fixture-main {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto;
+            }
+
+            .fixture-date-line { grid-column: 1/-1; }
+            .fx-score { grid-column: 1/-1; text-align: center; order: 3; }
+            .fx-away { text-align: left; }
+            .fx-meta { grid-column: 1/-1; justify-content: flex-start; order: 4; }
+
+            .hero-title { font-size: 3rem; }
+
+            .video-embed iframe { height: 240px; }
+
+            .site-header .wrap { flex-direction: column; gap: 12px; }
+
+            .tab { padding: 10px 16px; }
+
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-links { text-align: center; }
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- ── HEADER ── -->
+    <header class="site-header">
+        <div class="wrap">
+            <div class="logo" onclick="showPage('home')">
+                <div class="logo-icon">
+                    <div class="logo-tv">
+                        <div class="logo-tv-frame">
+                            <div class="logo-tv-pitch"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logo-wordmark">
+                    <span class="logo-name">Football Theatre</span>
+                    <span class="logo-tagline">English Football Archive</span>
+                </div>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" onclick="showPage('home')" data-page="home">Home</button>
+                <button class="nav-btn" onclick="showPage('seasons')" data-page="seasons">Seasons</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+
+        <!-- ════════════════════════════════
+             HOME PAGE
+        ════════════════════════════════ -->
+        <div id="page-home" class="page visible">
+            <div class="hero">
+                <div class="hero-eyebrow">English Football · 1888 to Present</div>
+                <h1 class="hero-title">Football<br><em>Theatre</em></h1>
+                <div class="hero-sub">Match highlights archive<span class="cursor"></span></div>
+                <p class="hero-desc">
+                    Browse every fixture across English football — from the Premier League era back to the Football League. Discover classic matches and watch highlights from any season.
+                </p>
+            </div>
+
+            <div class="seasons-heading">Available seasons</div>
+
+            <div class="seasons-grid">
+                <div class="season-card" onclick="showPage('season-2425')">
+                    <div class="season-year">2024/25</div>
+                    <div class="season-label">Top Flight · Complete</div>
+                    <div class="season-champion">
+                        <span class="champion-badge">🏆</span>
+                        <span>Liverpool — 84 pts</span>
+                    </div>
+                    <div class="season-stats">
+                        <span>380 matches</span>
+                        <span>·</span>
+                        <span>38 gameweeks</span>
+                    </div>
+                </div>
+
+                <div class="season-card disabled">
+                    <div class="season-year">2023/24</div>
+                    <div class="season-label">Top Flight · Coming soon</div>
+                    <div class="season-champion">
+                        <span class="champion-badge">🏆</span>
+                        <span>Manchester City — 91 pts</span>
+                    </div>
+                    <div class="season-stats">
+                        <span>380 matches</span>
+                        <span>·</span>
+                        <span>In progress</span>
+                    </div>
+                </div>
+
+                <div class="season-card disabled">
+                    <div class="season-year">2022/23</div>
+                    <div class="season-label">Top Flight · Coming soon</div>
+                    <div class="season-champion">
+                        <span class="champion-badge">🏆</span>
+                        <span>Manchester City — 89 pts</span>
+                    </div>
+                    <div class="season-stats">
+                        <span>380 matches</span>
+                        <span>·</span>
+                        <span>In progress</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>What is Football Theatre?</h3>
+                <p>A curated archive of English football match highlights, organised by season and gameweek. Find any fixture, discover classic matches, and watch highlights from official sources.</p>
+                <p>Currently featuring the complete 2024/25 season. Historical seasons — including pre-Premier League Football League coverage — are being added regularly.</p>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════
+             SEASON PAGE — 2024/25
+        ════════════════════════════════ -->
+        <div id="page-season-2425" class="page">
+            <div class="season-header">
+                <div class="page-kicker">English Football · Top Flight</div>
+                <h1 class="page-title">2024/25 Season</h1>
+            </div>
+
+            <div class="tab-bar">
+                <button class="tab active" onclick="showTab('fixtures')">Fixtures</button>
+                <button class="tab" onclick="showTab('summary')">Season Summary</button>
+            </div>
+
+            <!-- FIXTURES (default) -->
+            <div id="tab-fixtures" class="tab-panel visible">
+                <div class="legend" style="margin-bottom:32px">
+                    <div class="legend-item">
+                        <span class="badge badge-official">Official</span>
+                        <span>Sky Sports, BBC, NBC Sports, BT Sport</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="badge badge-global">Global</span>
+                        <span>Available worldwide</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="badge badge-blocked">Blocked</span>
+                        <span>Geo-restricted</span>
+                    </div>
+                </div>
+
+                <div id="gameweeks-container">
+                    <div class="loading">Loading fixtures</div>
+                </div>
+            </div>
+
+            <!-- SEASON SUMMARY — table + awards merged -->
+            <div id="tab-summary" class="tab-panel">
+                <h2 class="section-title">Final Table</h2>
+
+                <div class="table-wrap">
+                    <table class="league-table">
+                        <thead>
+                            <tr>
+                                <th style="width:44px">Pos</th>
+                                <th>Club</th>
+                                <th>Pld</th>
+                                <th>W</th>
+                                <th>D</th>
+                                <th>L</th>
+                                <th>GF</th>
+                                <th>GA</th>
+                                <th>GD</th>
+                                <th>Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <tr><td colspan="10" class="loading">Loading table</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="legend" style="margin-bottom:40px">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:var(--tan)"></div>
+                        <span>Champions</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:var(--teal)"></div>
+                        <span>Champions League (2–5)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:var(--terra)"></div>
+                        <span>Europa League (6–7)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#c17767"></div>
+                        <span>Relegated (18–20)</span>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Season Awards</h2>
+                <div class="summary-grid" style="margin-bottom:32px">
+                    <div class="stat-card">
+                        <div class="stat-label">Golden Boot</div>
+                        <div class="stat-value">29 goals</div>
+                        <div class="stat-detail">Mohamed Salah · Liverpool</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Most Assists</div>
+                        <div class="stat-value">18 assists</div>
+                        <div class="stat-detail">Mohamed Salah · Liverpool</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Golden Glove</div>
+                        <div class="stat-value">13 clean sheets</div>
+                        <div class="stat-detail">Raya (Arsenal) &amp; Sels (Forest)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Champions</div>
+                        <div class="stat-value">84 points</div>
+                        <div class="stat-detail">Liverpool · 25W 9D 4L</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Top Scorers (GF)</div>
+                        <div class="stat-value">86 goals</div>
+                        <div class="stat-detail">Liverpool &amp; Southampton</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Relegated</div>
+                        <div class="stat-value">3 clubs</div>
+                        <div class="stat-detail">Leicester · Ipswich · Southampton</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3>Season Notes</h3>
+                    <p>Liverpool's 20th league title drew level with Manchester United's all-time record. Arne Slot's first season in charge proved an immediate success following Jürgen Klopp's departure.</p>
+                    <p>All three promoted clubs — Leicester, Ipswich, and Southampton — were relegated, only the third time this has happened since the Premier League began in 1992.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════
+             SEASONS LIST PAGE
+        ════════════════════════════════ -->
+        <div id="page-seasons" class="page">
+            <div class="season-header">
+                <div class="page-kicker">Archive</div>
+                <h1 class="page-title">All Seasons</h1>
+            </div>
+
+            <div class="seasons-grid">
+                <div class="season-card" onclick="showPage('season-2425')">
+                    <div class="season-year">2024/25</div>
+                    <div class="season-label">Top Flight · Complete</div>
+                    <div class="season-champion"><span class="champion-badge">🏆</span> Liverpool</div>
+                    <div class="season-stats"><span>380 matches</span><span>·</span><span>Available now</span></div>
+                </div>
+                <div class="season-card disabled">
+                    <div class="season-year">2023/24</div>
+                    <div class="season-label">Coming soon</div>
+                    <div class="season-champion"><span class="champion-badge">🏆</span> Manchester City</div>
+                    <div class="season-stats"><span>380 matches</span><span>·</span><span>In progress</span></div>
+                </div>
+                <div class="season-card disabled">
+                    <div class="season-year">2022/23</div>
+                    <div class="season-label">Coming soon</div>
+                    <div class="season-champion"><span class="champion-badge">🏆</span> Manchester City</div>
+                    <div class="season-stats"><span>380 matches</span><span>·</span><span>In progress</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════
+             ABOUT PAGE
+        ════════════════════════════════ -->
+        <div id="page-about" class="page">
+            <div class="season-header">
+                <div class="page-kicker">Information</div>
+                <h1 class="page-title">About</h1>
+            </div>
+
+            <div class="about-grid">
+                <div class="info-box">
+                    <h3>What We Do</h3>
+                    <p>Football Theatre is a curated archive of English football match highlights — from the Premier League era back through the old First Division and beyond — making it easy to discover and watch any fixture from any season.</p>
+                    <p>Videos are sourced from official channels and quality uploaders, with geo-blocking transparency so you can find what works for you.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Video Sources</h3>
+                    <p><strong style="color:var(--tan)">Official:</strong> Sky Sports, BBC, NBC Sports, BT Sport</p>
+                    <p><strong style="color:var(--tan)">Priority:</strong> Neutral match highlights over club-specific content</p>
+                    <p><strong style="color:var(--tan)">Coverage:</strong> Multiple sources per match where possible</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Current Status</h3>
+                    <p>Proof-of-concept featuring the complete 2024/25 season table and sample fixtures from the opening gameweeks.</p>
+                    <p>Full season expansion and historical seasons are in development.</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Technology</h3>
+                    <p>Built with plain HTML, CSS, and JavaScript. Videos are discovered via the YouTube Data API v3 with smart matching to find the best highlights per match.</p>
+                    <p>No video content is hosted — all links point to original YouTube sources.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-inner">
+                <span class="footer-copy">Football Theatre &copy; 2026</span>
+                <span class="footer-links">
+                    <span class="footer-about-link" onclick="showPage('about')">About</span>
+                    <span> · </span>
+                    <span>All content remains on YouTube · Not affiliated with any football governing body</span>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── STATE ──
+        let currentVideo = null;
+
+        // ── INLINED DATA ──
+        const TABLE_DATA = {"season":"2024-25","teams":[{"pos":1,"team":"Liverpool","pld":38,"w":25,"d":9,"l":4,"gf":86,"ga":41,"gd":45,"pts":84},{"pos":2,"team":"Arsenal","pld":38,"w":20,"d":14,"l":4,"gf":69,"ga":34,"gd":35,"pts":74},{"pos":3,"team":"Manchester City","pld":38,"w":21,"d":8,"l":9,"gf":72,"ga":44,"gd":28,"pts":71},{"pos":4,"team":"Chelsea","pld":38,"w":20,"d":9,"l":9,"gf":64,"ga":43,"gd":21,"pts":69},{"pos":5,"team":"Newcastle United","pld":38,"w":20,"d":6,"l":12,"gf":68,"ga":47,"gd":21,"pts":66},{"pos":6,"team":"Aston Villa","pld":38,"w":19,"d":9,"l":10,"gf":58,"ga":51,"gd":7,"pts":66},{"pos":7,"team":"Nottingham Forest","pld":38,"w":19,"d":8,"l":11,"gf":58,"ga":46,"gd":12,"pts":65},{"pos":8,"team":"Brighton","pld":38,"w":16,"d":13,"l":9,"gf":66,"ga":59,"gd":7,"pts":61},{"pos":9,"team":"Bournemouth","pld":38,"w":15,"d":11,"l":12,"gf":58,"ga":46,"gd":12,"pts":56},{"pos":10,"team":"Brentford","pld":38,"w":16,"d":8,"l":14,"gf":66,"ga":57,"gd":9,"pts":56},{"pos":11,"team":"Fulham","pld":38,"w":15,"d":9,"l":14,"gf":54,"ga":54,"gd":0,"pts":54},{"pos":12,"team":"Crystal Palace","pld":38,"w":13,"d":14,"l":11,"gf":51,"ga":51,"gd":0,"pts":53},{"pos":13,"team":"Everton","pld":38,"w":11,"d":15,"l":12,"gf":42,"ga":44,"gd":-2,"pts":48},{"pos":14,"team":"West Ham","pld":38,"w":11,"d":10,"l":17,"gf":46,"ga":62,"gd":-16,"pts":43},{"pos":15,"team":"Manchester United","pld":38,"w":11,"d":9,"l":18,"gf":44,"ga":54,"gd":-10,"pts":42},{"pos":16,"team":"Wolves","pld":38,"w":12,"d":6,"l":20,"gf":54,"ga":69,"gd":-15,"pts":42},{"pos":17,"team":"Tottenham","pld":38,"w":11,"d":5,"l":22,"gf":64,"ga":65,"gd":-1,"pts":38},{"pos":18,"team":"Leicester","pld":38,"w":6,"d":7,"l":25,"gf":33,"ga":80,"gd":-47,"pts":25},{"pos":19,"team":"Ipswich","pld":38,"w":4,"d":10,"l":24,"gf":36,"ga":82,"gd":-46,"pts":22},{"pos":20,"team":"Southampton","pld":38,"w":2,"d":6,"l":30,"gf":26,"ga":86,"gd":-60,"pts":12}]};
+
+        const FIXTURES_DATA = {"season":"2024-25","gameweeks":[{"gameweek":1,"dates":"16-19 August 2024","fixtures":[{"home":"Manchester United","away":"Fulham","score":"1-0","date":"2024-08-16","videos":[{"videoId":"c0ThitdRp3E","title":"Manchester United vs. Fulham | Premier League Highlights | NBC Sports","channel":"NBC Sports","duration":"3:28","geo":"Global","geoBlocked":[],"type":"official"}]},{"home":"Ipswich","away":"Liverpool","score":"0-2","date":"2024-08-17","videos":[{"videoId":"example1","title":"Ipswich 0-2 Liverpool | Full Highlights","channel":"Sky Sports","duration":"11:20","geo":"Global","geoBlocked":[],"type":"official"}]},{"home":"Arsenal","away":"Wolves","score":"2-0","date":"2024-08-17","videos":[]},{"home":"Chelsea","away":"Manchester City","score":"0-2","date":"2024-08-18","videos":[{"videoId":"example3","title":"Chelsea 0-2 Manchester City | Haaland Goals Highlights","channel":"Sky Sports","duration":"11:40","geo":"Global","geoBlocked":[],"type":"official"}]}]},{"gameweek":2,"dates":"24-26 August 2024","fixtures":[{"home":"Manchester City","away":"Ipswich","score":"4-1","date":"2024-08-24","videos":[{"videoId":"example4","title":"Man City 4-1 Ipswich | Haaland Hat-Trick","channel":"Sky Sports","duration":"12:20","geo":"Global","geoBlocked":[],"type":"official"}]},{"home":"Wolves","away":"Chelsea","score":"2-6","date":"2024-08-25","videos":[{"videoId":"example5","title":"Wolves 2-6 Chelsea | Noni Madueke Hat-Trick","channel":"Sky Sports","duration":"13:45","geo":"Global","geoBlocked":[],"type":"official"}]}]},{"gameweek":3,"dates":"31 Aug - 1 Sep 2024","fixtures":[{"home":"Manchester United","away":"Liverpool","score":"0-3","date":"2024-09-01","videos":[{"videoId":"example6","title":"Man Utd 0-3 Liverpool | Dominant Display at Old Trafford","channel":"Sky Sports","duration":"12:05","geo":"Global","geoBlocked":[],"type":"official"}]},{"home":"Brighton","away":"Everton","score":"3-0","date":"2024-08-31","videos":[]}]}]};
+
+        // ── NAVIGATION ──
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(el => el.classList.remove('visible'));
+            const el = document.getElementById('page-' + page);
+            if (el) el.classList.add('visible');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.page === page) btn.classList.add('active');
+                if (page.startsWith('season') && btn.dataset.page === 'seasons') btn.classList.add('active');
+                if (page === 'home' && btn.dataset.page === 'home') btn.classList.add('active');
+                if (page === 'about' && btn.dataset.page === 'home') btn.classList.add('active');
+            });
+
+            // Always land on fixtures when entering a season
+            if (page.startsWith('season')) showTab('fixtures');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ── TABS ──
+        function showTab(tab) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('visible'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+
+            const panel = document.getElementById('tab-' + tab);
+            if (panel) panel.classList.add('visible');
+
+            document.querySelectorAll('.tab').forEach(t => {
+                if (t.getAttribute('onclick').includes("'" + tab + "'")) t.classList.add('active');
+            });
+        }
+
+        // ── POPULATE TABLE ──
+        function populateTable() {
+            const data = TABLE_DATA;
+
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+
+            data.teams.forEach(t => {
+                const pos = t.pos;
+                let posClass = 'td-pos';
+                let barClass = 'pos-bar-none';
+                if (pos === 1) { posClass += ' td-pos-champions'; barClass = 'pos-bar-champions'; }
+                else if (pos <= 5) { posClass += ' td-pos-ucl'; barClass = 'pos-bar-ucl'; }
+                else if (pos <= 7) { posClass += ' td-pos-euro'; barClass = 'pos-bar-euro'; }
+                else if (pos >= 18) { posClass += ' td-pos-rel'; barClass = 'pos-bar-rel'; }
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="${posClass}">
+                        <div class="pos-cell"><span class="pos-bar ${barClass}"></span>${pos}</div>
+                    </td>
+                    <td class="td-team">${t.team}</td>
+                    <td>${t.pld}</td>
+                    <td>${t.w}</td>
+                    <td>${t.d}</td>
+                    <td>${t.l}</td>
+                    <td>${t.gf}</td>
+                    <td>${t.ga}</td>
+                    <td>${t.gd >= 0 ? '+' : ''}${t.gd}</td>
+                    <td class="td-pts">${t.pts}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ── POPULATE FIXTURES ──
+        // ── HTML ESCAPE HELPER ──
+        // Prevents video titles with & < > ' " breaking the DOM
+        function esc(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        // ── GOOGLE FORM CONFIG ──
+        // Create a Google Form with these fields, then replace the URL and entry IDs:
+        //   - Match (short answer)  → entry.XXXXXXXXX
+        //   - Season (short answer) → entry.XXXXXXXXX
+        //   - URL (short answer)    → entry.XXXXXXXXX
+        //   - Notes (paragraph)     → entry.XXXXXXXXX
+        const FORM_BASE = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform';
+        const FORM_ENTRY_MATCH  = 'entry.000000001';
+        const FORM_ENTRY_SEASON = 'entry.000000002';
+        const FORM_ENTRY_URL    = 'entry.000000003';
+
+        function suggestUrl(matchLabel, season) {
+            const url = FORM_BASE
+                + '?usp=pp_url'
+                + '&' + FORM_ENTRY_MATCH  + '=' + encodeURIComponent(matchLabel)
+                + '&' + FORM_ENTRY_SEASON + '=' + encodeURIComponent(season)
+                + '&' + FORM_ENTRY_URL    + '=';
+            window.open(url, '_blank', 'noopener');
+        }
+
+        function populateFixtures() {
+            const data = FIXTURES_DATA;
+
+            const container = document.getElementById('gameweeks-container');
+            container.innerHTML = '';
+
+            data.gameweeks.forEach(gw => {
+                const gwEl = document.createElement('div');
+                gwEl.className = 'gw-section';
+
+                let html = `
+                    <div class="gw-header">
+                        <div class="gw-number">Gameweek ${gw.gameweek}</div>
+                        <div class="gw-dates">${gw.dates}</div>
+                    </div>
+                `;
+
+                gw.fixtures.forEach((fx, i) => {
+                    const id = `gw${gw.gameweek}-f${i}`;
+                    const videoCount = fx.videos ? fx.videos.length : 0;
+                    const hasVideo = videoCount > 0;
+                    const matchLabel = `${fx.home} v ${fx.away} (${fx.score}) — ${fx.date}`;
+                    const season = data.season;
+
+                    const dateStr = new Date(fx.date).toLocaleDateString('en-GB', {
+                        weekday: 'long', day: 'numeric', month: 'long'
+                    });
+
+                    const suggestBtn = `<a class="suggest-link" href="#" onclick="event.preventDefault(); event.stopPropagation(); suggestUrl('${matchLabel.replace(/'/g,"\\'")}', '${season}')">Suggest a link</a>`;
+
+                    let expandedContent = '';
+
+                    if (hasVideo) {
+                        const items = fx.videos.map((v, vi) => {
+                            const geoText = v.geoBlocked.length === 0 ? 'Global' : 'Blocked: ' + v.geoBlocked.join(', ');
+                            const geoClass = v.geoBlocked.length === 0 ? 'badge-global' : 'badge-blocked';
+                            // THEATRE: pass full videos array as JSON so the modal can build source switcher
+                            // TO REVERT: change onclick back to: playVideo('${id}', ${vi}, '${v.videoId}')
+                            const videosJson = esc(JSON.stringify(fx.videos));
+                            return `
+                                <div class="video-item">
+                                    <div class="video-item-head">
+                                        <div class="video-title">${esc(v.title)}</div>
+                                        <button class="watch-btn" onclick="event.stopPropagation(); openTheatre('${id}', ${vi}, JSON.parse(this.dataset.videos), '${esc(fx.home)}', '${esc(fx.away)}', '${fx.score}', '${fx.date}')" data-videos="${videosJson}">Watch</button>
+                                    </div>
+                                    <div class="video-badges">
+                                        ${v.type === 'official' ? `<span class="badge badge-official">Official</span>` : ''}
+                                        <span class="badge ${geoClass}">${geoText}</span>
+                                        <span class="badge badge-channel">${v.channel}</span>
+                                        <span class="badge badge-duration">${v.duration}</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+
+                        expandedContent = `
+                            <div class="video-list" id="vlist-${id}">
+                                <div class="video-list-header">Highlights — ${videoCount} source${videoCount !== 1 ? 's' : ''}</div>
+                                ${items}
+                                <div class="video-list-footer">${suggestBtn}</div>
+                            </div>
+                        `;
+                    } else {
+                        // Empty state — expands to a simple message + suggest button
+                        expandedContent = `
+                            <div class="video-list" id="vlist-${id}">
+                                <div class="empty-state">
+                                    <span class="empty-state-msg">No footage found for this match.</span>
+                                    ${suggestBtn}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    html += `
+                        <div class="fixture ${hasVideo ? '' : 'no-video'}" id="fixture-${id}" onclick="toggleFixture('${id}')">
+                            <div class="fixture-main">
+                                <div class="fixture-date-line">${dateStr}</div>
+                                <div class="fx-home">${fx.home}</div>
+                                <div class="fx-score">${fx.score}</div>
+                                <div class="fx-away">${fx.away}</div>
+                                <div class="fx-meta">
+                                    ${hasVideo
+                                        ? `<span class="video-pill">${videoCount} video${videoCount !== 1 ? 's' : ''}</span>`
+                                        : `<span class="no-footage-pill">No footage</span>`
+                                    }
+                                    <span class="expand-icon">›</span>
+                                </div>
+                            </div>
+                            ${expandedContent}
+                        </div>
+                    `;
+                });
+
+                gwEl.innerHTML = html;
+                container.appendChild(gwEl);
+            });
+        }
+
+        function toggleFixture(id) {
+            document.getElementById('fixture-' + id).classList.toggle('expanded');
+        }
+
+        function playVideo(fixtureId, videoIdx, videoId) {
+            const embedId = `embed-${fixtureId}-${videoIdx}`;
+            const embedEl = document.getElementById(embedId);
+            const iframe = embedEl.querySelector('iframe');
+
+            // close current if different
+            if (currentVideo && currentVideo !== embedEl) {
+                currentVideo.classList.remove('active');
+                currentVideo.querySelector('iframe').src = '';
+            }
+
+            if (embedEl.classList.contains('active')) {
+                // toggle off
+                embedEl.classList.remove('active');
+                iframe.src = '';
+                currentVideo = null;
+            } else {
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                embedEl.classList.add('active');
+                currentVideo = embedEl;
+                setTimeout(() => embedEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+            }
+        }
+
+        // ════════════════════════════════
+        // THEATRE MODAL
+        // To revert: delete this block and
+        // change watch-btn onclick back to:
+        // playVideo('${id}', ${vi}, '${v.videoId}')
+        // ════════════════════════════════
+        let theatreVideos = [];
+        let theatreCurrentIdx = 0;
+
+        function openTheatre(fixtureId, videoIdx, videos, home, away, score, date) {
+            theatreVideos = videos;
+            theatreCurrentIdx = videoIdx;
+
+            // Populate header
+            document.getElementById('theatre-home').textContent  = home;
+            document.getElementById('theatre-away').textContent  = away;
+            document.getElementById('theatre-score').textContent = score;
+            document.getElementById('theatre-meta').textContent  =
+                new Date(date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+            loadTheatreVideo(videoIdx);
+            buildSourceSwitcher();
+
+            document.getElementById('theatre').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function loadTheatreVideo(idx) {
+            theatreCurrentIdx = idx;
+            const v = theatreVideos[idx];
+            document.getElementById('theatre-iframe').src =
+                `https://www.youtube.com/embed/${v.videoId}?autoplay=1`;
+            document.getElementById('theatre-channel').textContent = v.channel;
+
+            // Update active source button
+            document.querySelectorAll('.theatre-source-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === idx);
+            });
+        }
+
+        function buildSourceSwitcher() {
+            const container = document.getElementById('theatre-sources');
+            if (theatreVideos.length <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+            let html = `<span class="theatre-source-label">Sources</span>`;
+            theatreVideos.forEach((v, i) => {
+                const geo = v.geoBlocked.length === 0 ? 'Global' : v.geoBlocked.join(', ');
+                html += `<button class="theatre-source-btn ${i === theatreCurrentIdx ? 'active' : ''}"
+                    onclick="loadTheatreVideo(${i})">${v.channel} <span style="opacity:0.5">· ${geo}</span></button>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function closeTheatre() {
+            document.getElementById('theatre').classList.remove('open');
+            document.getElementById('theatre-iframe').src = '';
+            document.body.style.overflow = '';
+        }
+
+        function theatreClickOutside(e) {
+            if (e.target === document.getElementById('theatre')) closeTheatre();
+        }
+
+        // Close on Escape
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeTheatre();
+        });
+        // ════ END THEATRE ════
+
+        // ── INIT ──
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTable();
+            populateFixtures();
+        });
+    </script>
+    <!-- ════ THEATRE MODAL ════ -->
+    <div id="theatre" class="theatre-backdrop" onclick="theatreClickOutside(event)">
+        <div class="theatre-bar">
+            <div class="theatre-match">
+                <div class="theatre-teams">
+                    <span id="theatre-home"></span>
+                    <span class="theatre-score" id="theatre-score"></span>
+                    <span id="theatre-away"></span>
+                </div>
+                <div class="theatre-meta" id="theatre-meta"></div>
+            </div>
+            <button class="theatre-close" onclick="closeTheatre()">✕ Close</button>
+        </div>
+
+        <div class="theatre-screen-wrap">
+            <div class="theatre-screen">
+                <div class="theatre-tv">
+                    <div class="theatre-video-container">
+                        <iframe id="theatre-iframe"
+                            src=""
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="theatre-tv-chin">
+                        <span class="theatre-channel" id="theatre-channel">Football Theatre</span>
+                        <div class="theatre-indicator">
+                            <div class="theatre-dot"></div>
+                            <span class="theatre-dot-label">Live</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="theatre-sources" id="theatre-sources"></div>
+    </div>
+    <!-- ════ END THEATRE MODAL ════ -->
+
+</body>
+</html>
