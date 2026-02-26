@@ -734,29 +734,137 @@
             transform: translateY(-1px);
         }
 
-        .video-badges {
+        /* ── TEAM FILTER ── */
+        .team-filter-wrap {
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 8px;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
-        .badge {
-            display: inline-block;
+        .team-filter-label {
             font-family: 'DM Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 2px 8px;
-            border-radius: 2px;
-            border: 1px solid currentColor;
+            letter-spacing: 0.08em;
+            color: var(--text-3);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        .badge-official { color: var(--tan); background: rgba(212,165,116,0.08); }
-        .badge-global   { color: var(--teal); background: rgba(123,163,160,0.08); }
-        .badge-blocked  { color: var(--terra); background: rgba(193,119,103,0.08); }
-        .badge-channel  { color: var(--text-3); border-color: var(--border-2); }
-        .badge-duration { color: var(--text-3); border-color: var(--border-2); }
+        .team-filter-select {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.82rem;
+            background: var(--bg-3);
+            border: 1px solid var(--border-2);
+            color: var(--text-2);
+            padding: 8px 36px 8px 14px;
+            border-radius: 2px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a7f73' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            transition: border-color 0.15s ease;
+            min-width: 200px;
+        }
+
+        .team-filter-select:hover { border-color: var(--tan); }
+        .team-filter-select:focus { outline: none; border-color: var(--tan); }
+
+        .team-filter-select.has-selection {
+            color: var(--tan);
+            border-color: var(--tan);
+        }
+
+        .filter-clear {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-3);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.15s;
+            display: none;
+        }
+        .filter-clear:hover { color: var(--tan); }
+        .filter-clear.visible { display: inline; }
+
+        .fixture-hidden { display: none; }
+        .gw-hidden { display: none; }
+
+        /* ── VIDEO META (dots + tooltips) ── */
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-3);
+        }
+
+        .source-dot {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: default;
+        }
+
+        .source-dot .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-official { background: var(--tan); }
+        .dot-global   { background: var(--teal); }
+        .dot-blocked  { background: var(--terra); }
+        .dot-fan      { background: var(--text-3); }
+
+        .source-dot .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-3);
+            border: 1px solid var(--border-2);
+            color: var(--text-2);
+            font-size: 0.72rem;
+            padding: 5px 10px;
+            border-radius: 2px;
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.15s ease;
+            z-index: 100;
+        }
+
+        .source-dot .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid transparent;
+            border-top-color: var(--border-2);
+        }
+
+        .source-dot:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .meta-divider {
+            color: var(--border-2);
+        }
 
         /* ── EMBED ── */
         .video-embed {
@@ -1363,19 +1471,13 @@
 
             <!-- FIXTURES (default) -->
             <div id="tab-fixtures" class="tab-panel visible">
-                <div class="legend" style="margin-bottom:32px">
-                    <div class="legend-item">
-                        <span class="badge badge-official">Official</span>
-                        <span>Sky Sports, BBC, NBC Sports, BT Sport</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="badge badge-global">Global</span>
-                        <span>Available worldwide</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="badge badge-blocked">Blocked</span>
-                        <span>Geo-restricted</span>
-                    </div>
+                <div class="team-filter-wrap">
+                    <label class="team-filter-label" for="team-select">Club</label>
+                    <select class="team-filter-select" id="team-select" onchange="onTeamSelectChange(this)">
+                        <option value="">All clubs</option>
+                        <!-- options injected by JS on page load -->
+                    </select>
+                    <button class="filter-clear" id="filter-clear" onclick="setTeamFilter(null)">Clear</button>
                 </div>
 
                 <div id="gameweeks-container">
@@ -1556,6 +1658,8 @@
     <script>
         // ── STATE ──
         let currentVideo = null;
+        let activeTeam = null;
+        let data = null;
 
         // ── NAVIGATION ──
         function showPage(page) {
@@ -1661,9 +1765,10 @@
             const container = document.getElementById('gameweeks-container');
             container.innerHTML = '';
 
-            data.gameweeks.forEach(gw => {
+            data.gameweeks.forEach((gw, gwIdx) => {
                 const gwEl = document.createElement('div');
                 gwEl.className = 'gw-section';
+                gwEl.id = `gw-${gwIdx}`;
 
                 let html = `
                     <div class="gw-header">
@@ -1673,7 +1778,7 @@
                 `;
 
                 gw.fixtures.forEach((fx, i) => {
-                    const id = `gw${gw.gameweek}-f${i}`;
+                    const id = `gw${gwIdx}-f${i}`;
                     const videoCount = fx.videos ? fx.videos.length : 0;
                     const hasVideo = videoCount > 0;
                     const matchLabel = `${fx.home} v ${fx.away} (${fx.score}) — ${fx.date}`;
@@ -1689,8 +1794,6 @@
 
                     if (hasVideo) {
                         const items = fx.videos.map((v, vi) => {
-                            const geoText = v.geoBlocked.length === 0 ? 'Global' : 'Blocked: ' + v.geoBlocked.join(', ');
-                            const geoClass = v.geoBlocked.length === 0 ? 'badge-global' : 'badge-blocked';
                             // THEATRE: pass full videos array as JSON so the modal can build source switcher
                             // TO REVERT: change onclick back to: playVideo('${id}', ${vi}, '${v.videoId}')
                             const videosJson = esc(JSON.stringify(fx.videos));
@@ -1700,11 +1803,19 @@
                                         <div class="video-title">${esc(v.title)}</div>
                                         <button class="watch-btn" onclick="event.stopPropagation(); openTheatre('${id}', ${vi}, JSON.parse(this.dataset.videos), '${esc(fx.home)}', '${esc(fx.away)}', '${fx.score}', '${fx.date}')" data-videos="${videosJson}">Watch</button>
                                     </div>
-                                    <div class="video-badges">
-                                        ${v.type === 'official' ? `<span class="badge badge-official">Official</span>` : ''}
-                                        <span class="badge ${geoClass}">${geoText}</span>
-                                        <span class="badge badge-channel">${v.channel}</span>
-                                        <span class="badge badge-duration">${v.duration}</span>
+                                    <div class="video-meta">
+                                        <span class="source-dot">
+                                            <span class="dot ${v.type === 'official' ? 'dot-official' : 'dot-fan'}"></span>
+                                            <span class="tooltip">${v.type === 'official' ? 'Official channel' : 'Fan upload'}</span>
+                                        </span>
+                                        <span class="source-dot">
+                                            <span class="dot ${v.geoBlocked.length === 0 ? 'dot-global' : 'dot-blocked'}"></span>
+                                            <span class="tooltip">${v.geoBlocked.length === 0 ? 'Available worldwide' : 'Not available in: ' + v.geoBlocked.join(', ')}</span>
+                                        </span>
+                                        <span class="meta-divider">·</span>
+                                        <span>${v.channel}</span>
+                                        <span class="meta-divider">·</span>
+                                        <span>${v.duration}</span>
                                     </div>
                                 </div>
                             `;
@@ -1853,6 +1964,55 @@
         });
         // ════ END THEATRE ════
 
+        // ── TEAM FILTER ──
+        function buildTeamFilter() {
+            const seen = new Set();
+            const teams = [];
+            data.gameweeks.forEach(gw => {
+                gw.fixtures.forEach(f => {
+                    if (!seen.has(f.home)) { seen.add(f.home); teams.push(f.home); }
+                    if (!seen.has(f.away)) { seen.add(f.away); teams.push(f.away); }
+                });
+            });
+            teams.sort((a, b) => a.localeCompare(b));
+            const select = document.getElementById('team-select');
+            teams.forEach(team => {
+                const opt = document.createElement('option');
+                opt.value = team;
+                opt.textContent = team;
+                select.appendChild(opt);
+            });
+        }
+
+        function onTeamSelectChange(select) {
+            setTeamFilter(select.value || null);
+        }
+
+        function setTeamFilter(team) {
+            activeTeam = team;
+            const select = document.getElementById('team-select');
+            const clearBtn = document.getElementById('filter-clear');
+            select.value = team || '';
+            select.classList.toggle('has-selection', !!team);
+            clearBtn.classList.toggle('visible', !!team);
+            applyFilter();
+        }
+
+        function applyFilter() {
+            data.gameweeks.forEach((gw, gwIdx) => {
+                const gwEl = document.getElementById(`gw-${gwIdx}`);
+                let gwVisible = 0;
+                gw.fixtures.forEach((fixture, fIdx) => {
+                    const fEl = document.getElementById(`fixture-gw${gwIdx}-f${fIdx}`);
+                    if (!fEl) return;
+                    const match = !activeTeam || fixture.home === activeTeam || fixture.away === activeTeam;
+                    fEl.classList.toggle('fixture-hidden', !match);
+                    if (match) gwVisible++;
+                });
+                gwEl.classList.toggle('gw-hidden', gwVisible === 0);
+            });
+        }
+
         // ── INIT ──
         document.addEventListener('DOMContentLoaded', async () => {
             try {
@@ -1860,10 +2020,11 @@
                     fetch('data/2024-25-table.json'),
                     fetch('data/2024-25-fixtures-full.json')
                 ]);
-                const tableData    = await tableRes.json();
-                const fixturesData = await fixturesRes.json();
+                const tableData = await tableRes.json();
+                data = await fixturesRes.json();
                 populateTable(tableData);
-                populateFixtures(fixturesData);
+                populateFixtures(data);
+                buildTeamFilter();
             } catch (err) {
                 console.error('Failed to load data:', err);
             }
