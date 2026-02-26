@@ -15,6 +15,7 @@ Usage:
     python scrape_fixtures.py --season 2024 --output data/2024-25-fixtures-full.json
 """
 
+import os
 import json
 import argparse
 from datetime import datetime
@@ -34,8 +35,9 @@ class FixtureScraper:
     
     def __init__(self):
         self.base_url = "https://api.football-data.org/v4"
+        api_key = os.environ.get('FOOTBALL_DATA_API_KEY', '')
         self.headers = {
-            'X-Auth-Token': 'YOUR_API_KEY_HERE'  # Optional: Get free key from football-data.org
+            'X-Auth-Token': api_key
         }
         # Premier League ID in football-data.org
         self.premier_league_id = 'PL'
@@ -240,6 +242,11 @@ def main():
 ╚══════════════════════════════════════════════════════════════╝
     """)
     
+    if not os.environ.get('FOOTBALL_DATA_API_KEY'):
+        print("⚠️  FOOTBALL_DATA_API_KEY not set — API calls will be unauthenticated")
+        print("   Set it with: export FOOTBALL_DATA_API_KEY='your-key-here'")
+        print("   Get a free key at: https://www.football-data.org/\n")
+
     scraper = FixtureScraper()
     fixtures = scraper.get_season_fixtures(args.season)
     scraper.save_to_json(fixtures, args.output)
@@ -252,7 +259,7 @@ NOTE: If automatic scraping failed, you can:
 
 For football-data.org API:
 - Get free API key at: https://www.football-data.org/
-- Add to script: self.headers['X-Auth-Token'] = 'YOUR_KEY'
+- Set it: export FOOTBALL_DATA_API_KEY='your-key-here'
 - 10 requests/minute limit (enough for this)
     """)
 
