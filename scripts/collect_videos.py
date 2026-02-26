@@ -23,7 +23,7 @@ API Costs:
 import os
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from typing import List, Dict, Optional
 import sys
 
@@ -64,6 +64,20 @@ class YouTubeVideoCollector:
             'BT Sport': ['US', 'CA'],
             'beIN SPORTS': [],  # Usually region-specific
         }
+
+        # Non-English channel name fragments (case-insensitive)
+        self.non_english_channels = [
+            'telemundo', 'espn deportes', 'tudn', 'univision', 'bein sports arabic',
+            'movistar', 'dazn espanol', 'canal+', 'sky italia', 'sportv',
+            'canal do futebol', 'eleven sports portugal', 'eleven sports pl',
+        ]
+
+        # Non-English title keywords that signal foreign-language content
+        self.non_english_title_terms = [
+            'resumen', 'todos los goles', 'en vivo', 'destacados', 'goles',
+            'melhores momentos', 'resumo', 'zusammenfassung', 'tore',
+            'buts', 'résumé', 'maç özeti', 'gollar',
+        ]
     
     def search_match_videos(self, home: str, away: str, date: str, 
                            score: Optional[str] = None) -> List[Dict]:
@@ -112,9 +126,17 @@ class YouTubeVideoCollector:
         # Remove None values
         search_queries = [q for q in search_queries if q]
         
+        # Date window: match day through 14 days after (catches same-day and delayed uploads)
+        published_after = match_date.strftime('%Y-%m-%dT00:00:00Z')
+        published_before = (match_date + timedelta(days=14)).strftime('%Y-%m-%dT00:00:00Z')
+
         for query in search_queries[:3]:  # Limit to first 3 strategies to save quota
             try:
-                results = self._youtube_search(query, max_results=5)
+                results = self._youtube_search(
+                    query, max_results=5,
+                    published_after=published_after,
+                    published_before=published_before,
+                )
                 self.searches_today += 1
                 self.quota_used += 100  # Each search costs ~100 units
                 
@@ -148,18 +170,25 @@ class YouTubeVideoCollector:
         
         return videos[:5]  # Return top 5 videos max per match
     
-    def _youtube_search(self, query: str, max_results: int = 10) -> List[Dict]:
+    def _youtube_search(self, query: str, max_results: int = 10,
+                        published_after: Optional[str] = None,
+                        published_before: Optional[str] = None) -> List[Dict]:
         """Execute YouTube search API call."""
-        request = self.youtube.search().list(
+        params = dict(
             part='snippet',
             q=query,
             type='video',
             maxResults=max_results,
             order='relevance',
             videoDuration='medium',  # 4-20 mins (typical highlight length)
-            regionCode='US'  # Default search region
+            regionCode='US',  # Default search region
         )
-        
+        if published_after:
+            params['publishedAfter'] = published_after
+        if published_before:
+            params['publishedBefore'] = published_before
+
+        request = self.youtube.search().list(**params)
         response = request.execute()
         return response.get('items', [])
     
@@ -182,17 +211,21 @@ class YouTubeVideoCollector:
             # Determine geo-blocking (heuristic based on channel)
             geo_blocked = self._get_geo_blocking(channel)
             
+            published_at = snippet['publishedAt']
             return {
                 'videoId': video_id,
                 'title': title,
                 'channel': channel,
                 'channelId': snippet['channelId'],
-                'publishedAt': snippet['publishedAt'],
+                'publishedAt': published_at,
                 'thumbnail': snippet['thumbnails']['high']['url'],
                 'description': snippet.get('description', '')[:200],
                 'isOfficial': is_official,
                 'geoBlocked': geo_blocked,
-                'relevanceScore': self._calculate_relevance(title, channel, home, away)
+                'relevanceScore': self._calculate_relevance(
+                    title, channel, home, away,
+                    published_at=published_at, match_date=date,
+                ),
             }
             
         except Exception as e:
@@ -225,32 +258,56 @@ class YouTubeVideoCollector:
                 return blocked_regions
         return []  # Assume global if unknown
     
-    def _calculate_relevance(self, title: str, channel: str, 
-                            home: str, away: str) -> float:
+    def _calculate_relevance(self, title: str, channel: str,
+                             home: str, away: str,
+                             published_at: Optional[str] = None,
+                             match_date: Optional[str] = None) -> float:
         """Calculate relevance score (0-1) for ranking."""
         score = 0.5  # Base score
-        
+
         title_lower = title.lower()
-        
+        channel_lower = channel.lower()
+
         # Boost for both team names
         if home.lower() in title_lower and away.lower() in title_lower:
             score += 0.2
-        
+
         # Boost for official channels
         if any(official in channel for official in self.official_channels.keys()):
             score += 0.15
-        
+
         # Boost for highlight keywords
         if 'extended' in title_lower:
             score += 0.1
         if 'full highlights' in title_lower:
             score += 0.1
-        
+
         # Penalty for club-specific highlights
         if 'official' in title_lower and (home.lower() in title_lower or away.lower() in title_lower):
             score -= 0.05  # Might be one-sided
-        
-        return min(score, 1.0)
+
+        # Penalty for non-English channels
+        if any(ne in channel_lower for ne in self.non_english_channels):
+            score -= 0.3
+
+        # Penalty for non-English title keywords
+        if any(term in title_lower for term in self.non_english_title_terms):
+            score -= 0.2
+
+        # Boost for videos published close to the match date (within 3 days = fresher/more likely correct game)
+        if published_at and match_date:
+            try:
+                pub_dt = datetime.fromisoformat(published_at.replace('Z', '+00:00'))
+                match_dt = datetime.strptime(match_date, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+                days_after = (pub_dt - match_dt).days
+                if 0 <= days_after <= 3:
+                    score += 0.1  # Published quickly after the match — likely the right game
+                elif days_after > 7:
+                    score -= 0.05  # Late upload — slightly less confident
+            except (ValueError, TypeError):
+                pass
+
+        return max(0.0, min(score, 1.0))
     
     def _rank_videos(self, videos: List[Dict], home: str, away: str, 
                     score: Optional[str]) -> List[Dict]:
