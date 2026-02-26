@@ -78,6 +78,34 @@ class YouTubeVideoCollector:
             'melhores momentos', 'resumo', 'zusammenfassung', 'tore',
             'buts', 'résumé', 'maç özeti', 'gollar',
         ]
+
+        # Known-good broadcaster channels — get a strong score boost so they
+        # always outrank random reupload accounts (matched as substrings, lowercase).
+        self.broadcaster_whitelist = {
+            'nbc sports', 'sky sports', 'sky sports football', 'premier league',
+            'tnt sports', 'amazon prime video sport', 'bein sports', 'bt sport',
+            'channel 4 sport', 'channel 4', 'itv sport',
+        }
+
+        # Official club channel name fragments — preferred over reuploads but
+        # ranked below major broadcasters (matched as substrings, lowercase).
+        self.club_channel_whitelist = {
+            'arsenal', 'liverpool', 'chelsea', 'manchester city', 'manchester united',
+            'man city', 'man utd', 'man united', 'tottenham hotspur', 'tottenham hotspur fc',
+            'newcastle united', 'aston villa', 'west ham united',
+            'brighton & hove albion', 'brentford fc', 'fulham fc',
+            'crystal palace', 'wolverhampton wanderers',
+            'everton', 'nottingham forest', 'luton town', 'burnley fc',
+            'sheffield united', 'afc bournemouth', 'leicester city',
+            'ipswich town', 'southampton fc',
+        }
+
+        # Fragments in channel names that signal reupload / low-quality accounts
+        # (matched as substrings, lowercase).
+        self.reupload_channel_patterns = [
+            'cyber', 'highlights hd', 'sir-',
+            'gameeworld', 'understand facts', 'sports pulse',
+        ]
     
     def search_match_videos(self, home: str, away: str, date: str, 
                            score: Optional[str] = None) -> List[Dict]:
@@ -205,8 +233,12 @@ class YouTubeVideoCollector:
             if not self._is_relevant_video(title, home, away):
                 return None
             
-            # Determine if official channel
-            is_official = any(official in channel for official in self.official_channels.keys())
+            # Determine if official channel (broadcaster whitelist or club channel)
+            channel_lower = channel.lower()
+            is_official = (
+                any(wl in channel_lower for wl in self.broadcaster_whitelist)
+                or any(club in channel_lower for club in self.club_channel_whitelist)
+            )
             
             # Determine geo-blocking (heuristic based on channel)
             geo_blocked = self._get_geo_blocking(channel)
@@ -242,7 +274,10 @@ class YouTubeVideoCollector:
         has_team = home_lower in title_lower or away_lower in title_lower
         
         # Filter out common false positives
-        excluded_terms = ['fifa', 'pes', 'fm24', 'career mode', 'prediction', 'preview']
+        excluded_terms = [
+            'fifa', 'pes', 'fm24', 'career mode', 'prediction', 'preview',
+            'from the stands', 'fan cam', 'phone footage',
+        ]
         has_excluded = any(term in title_lower for term in excluded_terms)
         
         # Prefer highlight keywords
@@ -272,9 +307,22 @@ class YouTubeVideoCollector:
         if home.lower() in title_lower and away.lower() in title_lower:
             score += 0.2
 
-        # Boost for official channels
-        if any(official in channel for official in self.official_channels.keys()):
-            score += 0.15
+        # Channel quality scoring — three tiers so that good sources always
+        # outrank reupload channels when both are available for the same match.
+        is_broadcaster = any(wl in channel_lower for wl in self.broadcaster_whitelist)
+        is_club_channel = any(club in channel_lower for club in self.club_channel_whitelist)
+
+        if is_broadcaster:
+            score += 0.3  # Major broadcaster — always ranks above reuploads
+        elif is_club_channel:
+            score += 0.2  # Official club channel — preferred over reuploads
+        else:
+            # Penalise channels that look like random reupload accounts.
+            # Checks are cumulative so a channel can incur multiple penalties.
+            if self._is_allcaps_channel(channel):
+                score -= 0.35
+            if any(pat in channel_lower for pat in self.reupload_channel_patterns):
+                score -= 0.3
 
         # Boost for highlight keywords
         if 'extended' in title_lower:
@@ -307,9 +355,24 @@ class YouTubeVideoCollector:
             except (ValueError, TypeError):
                 pass
 
+        # Unknown channels (not broadcaster or club whitelist) are capped at 0.65
+        # so they can never outrank official sources regardless of other bonuses.
+        if not is_broadcaster and not is_club_channel:
+            return max(0.0, min(score, 0.65))
         return max(0.0, min(score, 1.0))
     
-    def _rank_videos(self, videos: List[Dict], home: str, away: str, 
+    def _is_allcaps_channel(self, channel: str) -> bool:
+        """Return True if the channel name is entirely uppercase (reupload signal).
+
+        Legitimate acronyms like 'NBC', 'BT', or 'TNT' appear inside mixed-case
+        names ('NBC Sports', 'BT Sport') so they are not caught here.  A channel
+        like 'CYBER HIGHLIGHTS HD' has no lowercase letters at all and is flagged.
+        The five-letter minimum avoids penalising very short acronym-only names.
+        """
+        letters = ''.join(c for c in channel if c.isalpha())
+        return len(letters) > 5 and letters == letters.upper()
+
+    def _rank_videos(self, videos: List[Dict], home: str, away: str,
                     score: Optional[str]) -> List[Dict]:
         """Rank videos by relevance and quality."""
         # Sort by relevance score (descending)
@@ -375,7 +438,7 @@ def process_season(collector: YouTubeVideoCollector, fixtures_file: str,
     """
     print("📂 Loading fixtures...")
     data = load_fixtures(fixtures_file)
-    
+
     results = {
         'season': data.get('season', 'Unknown'),
         'processedAt': datetime.now().isoformat(),
@@ -415,7 +478,17 @@ def process_season(collector: YouTubeVideoCollector, fixtures_file: str,
             
             # Search for videos
             videos = collector.search_match_videos(home, away, date, score)
-            
+
+            # Preserve Sky Sports videos from the input fixture (added by enrich_sky.py).
+            # These are always kept at the front, regardless of whether a previous
+            # output file exists.
+            sky_videos = [v for v in fixture.get('videos', []) if 'Sky Sports' in v.get('channel', '')]
+            if sky_videos:
+                sky_ids = {v['videoId'] for v in sky_videos}
+                merged = sky_videos + [v for v in videos if v['videoId'] not in sky_ids]
+                merged.sort(key=lambda v: v.get('relevanceScore', 0), reverse=True)
+                videos = merged[:5]
+
             fixture_result = {
                 **fixture,
                 'videos': videos,

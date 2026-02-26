@@ -1,0 +1,629 @@
+{
+  "season": "2024-25",
+  "processedAt": "2026-02-25T20:30:54.621994",
+  "gameweeks": [
+    {
+      "gameweek": 1,
+      "dates": "16-19 August 2024",
+      "fixtures": [
+        {
+          "home": "Manchester United",
+          "away": "Fulham",
+          "score": "1-0",
+          "date": "2024-08-16",
+          "videos": [
+            {
+              "videoId": "c0ThitdRp3E",
+              "title": "Manchester United v. Fulham | PREMIER LEAGUE HIGHLIGHTS | 8/16/2024 | NBC Sports",
+              "channel": "NBC Sports",
+              "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+              "publishedAt": "2024-08-16T21:42:20Z",
+              "thumbnail": "https://i.ytimg.com/vi/c0ThitdRp3E/hqdefault.jpg",
+              "description": "The 2024-25 Premier League season kicked off with a trip to Old Trafford, where Joshua Zirkzee's debut goal helped guide ...",
+              "isOfficial": true,
+              "geoBlocked": [
+                "GB",
+                "IE"
+              ],
+              "relevanceScore": 0.95
+            },
+            {
+              "videoId": "YOsX_jZ99xQ",
+              "title": "Manchester United Vs Fulham 1 0｜ All Goals   Extended Highlights｜Premier League 2024 2025",
+              "channel": "karabo fortune gaasite",
+              "channelId": "UCtCsjfpzRmpDpNf5gkiXHhw",
+              "publishedAt": "2024-08-16T21:23:18Z",
+              "thumbnail": "https://i.ytimg.com/vi/YOsX_jZ99xQ/hqdefault.jpg",
+              "description": "",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "kIHaLFpx5Lo",
+              "title": "Manchester United 1-0 Fulham | Goals &amp; Highlights | Premier League 2024/25",
+              "channel": "Sports Pulse",
+              "channelId": "UCyodFZ4HisB4hZHdMYnfz0g",
+              "publishedAt": "2024-08-17T02:57:25Z",
+              "thumbnail": "https://i.ytimg.com/vi/kIHaLFpx5Lo/hqdefault.jpg",
+              "description": "Joshua Zirkzee's debut goal earned United all three points on the opening day of the Premier League season!",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            },
+            {
+              "videoId": "c3dMG97qUSE",
+              "title": "EXTENDED HIGHLIGHTS | Man Utd 1-0 Fulham | Tight Loss To Start Season",
+              "channel": "Fulham Football Club",
+              "channelId": "UC2VLfz92cTT8jHIFOecC-LA",
+              "publishedAt": "2024-08-19T15:13:31Z",
+              "thumbnail": "https://i.ytimg.com/vi/c3dMG97qUSE/hqdefault.jpg",
+              "description": "Get more of the action from Old Trafford as Fulham faced Manchester United on Friday night. SUBSCRIBE now and never miss an ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7
+            },
+            {
+              "videoId": "4MT71ajgGNo",
+              "title": "Highlights &amp; Goles: Man United vs. Fulham 1-0 | Premier League | Telemundo Deportes",
+              "channel": "Telemundo Deportes",
+              "channelId": "UCjZ7QPKb89R-4SxzBoceyOg",
+              "publishedAt": "2024-08-16T21:12:27Z",
+              "thumbnail": "https://i.ytimg.com/vi/4MT71ajgGNo/hqdefault.jpg",
+              "description": "Video oficial de Telemundo Deportes. Los “Red Devils” inician la temporada con un sufrido triunfo sobre los “Cottagers” y con ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.1
+            }
+          ],
+          "videoCount": 5
+        },
+        {
+          "home": "Ipswich",
+          "away": "Liverpool",
+          "score": "0-2",
+          "date": "2024-08-17",
+          "videos": [
+            {
+              "videoId": "HyHhzEo7PNs",
+              "title": "Ipswich Town v. Liverpool | PREMIER LEAGUE HIGHLIGHTS | 8/17/2024 | NBC Sports",
+              "channel": "NBC Sports",
+              "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+              "publishedAt": "2024-08-17T14:15:36Z",
+              "thumbnail": "https://i.ytimg.com/vi/HyHhzEo7PNs/hqdefault.jpg",
+              "description": "The Arne Slot era is off to a winning start thanks to second half goals from Diogo Jota and Mohamed Salah to secure three points ...",
+              "isOfficial": true,
+              "geoBlocked": [
+                "GB",
+                "IE"
+              ],
+              "relevanceScore": 0.95
+            },
+            {
+              "videoId": "bLyix4pTWlY",
+              "title": "Extended Highlights: Ipswich Town 0-2 Liverpool | Jota &amp; Salah start Slot era with a win",
+              "channel": "Liverpool FC",
+              "channelId": "UC9LQwHZoucFT94I2h6JOcjw",
+              "publishedAt": "2024-08-19T10:30:13Z",
+              "thumbnail": "https://i.ytimg.com/vi/bLyix4pTWlY/hqdefault.jpg",
+              "description": "Watch 10 minutes worth of action from Portman Road where the Reds started Arne Slot's reign as Head Coach with a victory ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "kor9Tvko1xw",
+              "title": "Ipswich Town (0-2) Liverpool | All Goals &amp; Extended Highlights | Premier League 2024/2025",
+              "channel": "Sir-Chris Highlights",
+              "channelId": "UCqA2j9K85w9nBq-ef7rh9kw",
+              "publishedAt": "2024-08-18T01:50:49Z",
+              "thumbnail": "https://i.ytimg.com/vi/kor9Tvko1xw/hqdefault.jpg",
+              "description": "Ipswich Town vs Liverpool | Premier League 2024/25 | #IPSLIV | All Goals & Extended Highlights #IpswichTown #Liverpool ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "YhUy8nekroA",
+              "title": "LIVERPOOL vs IPSWICH 2-0 || EXTENDED HIGHLIGHTS",
+              "channel": "E I Sports ",
+              "channelId": "UCreUxiT0MusegeS5eUvRsvA",
+              "publishedAt": "2024-08-17T15:09:01Z",
+              "thumbnail": "https://i.ytimg.com/vi/YhUy8nekroA/hqdefault.jpg",
+              "description": "Liverpool vs Ipswich Town 2-0 highlights & All goals liga inggris 2024 Liverpool vs Ipswich Town epl highlights 2024 liga inggris ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "ryEU1vpyZHI",
+              "title": "Liverpool vs Ipswich Town | Premier league 2024 - 2025 I Extended Highlights",
+              "channel": "CYBER WORLD",
+              "channelId": "UCIb440I7WRovpMgtffHzFVw",
+              "publishedAt": "2024-08-17T14:02:35Z",
+              "thumbnail": "https://i.ytimg.com/vi/ryEU1vpyZHI/hqdefault.jpg",
+              "description": "Liverpool vs Ipswich Town | Premier league 2024 - 2025 I Extended Highlights Liverpool vs Ipswich Town | Premier league 2024 ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            }
+          ],
+          "videoCount": 5
+        },
+        {
+          "home": "Arsenal",
+          "away": "Wolves",
+          "score": "2-0",
+          "date": "2024-08-17",
+          "videos": [
+            {
+              "videoId": "dy3FmCH3XD4",
+              "title": "Arsenal v. Wolves | PREMIER LEAGUE HIGHLIGHTS | 8/17/2024 | NBC Sports",
+              "channel": "NBC Sports",
+              "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+              "publishedAt": "2024-08-17T16:30:36Z",
+              "thumbnail": "https://i.ytimg.com/vi/dy3FmCH3XD4/hqdefault.jpg",
+              "description": "Arsenal start their 2024-25 campaign with three points in an impressive performance against Wolves at the Emirates in ...",
+              "isOfficial": true,
+              "geoBlocked": [
+                "GB",
+                "IE"
+              ],
+              "relevanceScore": 0.95
+            },
+            {
+              "videoId": "Pqau7_BAnHE",
+              "title": "Havertz and Saka score in win! | EXTENDED HIGHLIGHTS | Arsenal v Wolves (2-0) | Premier League",
+              "channel": "Arsenal",
+              "channelId": "UCpryVRk_VDudG8SHXgWcG0w",
+              "publishedAt": "2024-08-18T23:00:11Z",
+              "thumbnail": "https://i.ytimg.com/vi/Pqau7_BAnHE/hqdefault.jpg",
+              "description": "Enjoy extended highlights of our 2-0 win against Wolves at Emirates Stadium where both Kai Havertz and Bukayo Saka were on ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "qJwBakhOXbA",
+              "title": "Arsenal Begin The New Season With A Win! | Arsenal 2-0 Wolves | Match Day Highlights",
+              "channel": "AFTV",
+              "channelId": "UCBTy8j2cPy6zw68godcE7MQ",
+              "publishedAt": "2024-08-17T20:07:14Z",
+              "thumbnail": "https://i.ytimg.com/vi/qJwBakhOXbA/hqdefault.jpg",
+              "description": "Don Robbie's Football March saw AFTV founder and host Robbie Lyle walk to every Premier League club in London to raise ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            },
+            {
+              "videoId": "TF2SS7dW4Qw",
+              "title": "ARSENAL 2 0 WOLVES | 24/25 season | Round 1| EPL Game Highlights",
+              "channel": "UNDERSTAND FACTS",
+              "channelId": "UCM39T5elQfhV5AhiH-I9E0w",
+              "publishedAt": "2024-08-17T19:55:01Z",
+              "thumbnail": "https://i.ytimg.com/vi/TF2SS7dW4Qw/hqdefault.jpg",
+              "description": "FULL-TIME: ARSENAL 2-0 WOLVES Sealed with Saka's second-half magic, Arsenal secure three points on their opening day, ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            },
+            {
+              "videoId": "Ad59opt2rIc",
+              "title": "Arsenal 2-0 Wolves | All Goals &amp; Highlights – Premier League 24/25!",
+              "channel": "Sports Pulse",
+              "channelId": "UCyodFZ4HisB4hZHdMYnfz0g",
+              "publishedAt": "2024-08-17T16:41:45Z",
+              "thumbnail": "https://i.ytimg.com/vi/Ad59opt2rIc/hqdefault.jpg",
+              "description": "Arsenal 2-0 Wolves | All Goals & Highlights – Premier League 24/25! #football #arsenal #wolves #premierleague Subscribe ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            }
+          ],
+          "videoCount": 5
+        },
+        {
+          "home": "Everton",
+          "away": "Brighton",
+          "score": "0-3",
+          "date": "2024-08-17",
+          "videos": [
+            {
+              "videoId": "hum03ULcfOk",
+              "title": "Everton v. Brighton | PREMIER LEAGUE HIGHLIGHTS | 8/17/2024 | NBC Sports",
+              "channel": "NBC Sports",
+              "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+              "publishedAt": "2024-08-17T17:44:35Z",
+              "thumbnail": "https://i.ytimg.com/vi/hum03ULcfOk/hqdefault.jpg",
+              "description": "Fabian Hurzeler starts his tenure as Brighton manager with an impressive 3-0 victory against Everton at Goodison Park in ...",
+              "isOfficial": true,
+              "geoBlocked": [
+                "GB",
+                "IE"
+              ],
+              "relevanceScore": 0.95
+            },
+            {
+              "videoId": "VAPt38w6fQ4",
+              "title": "EXTENDED HIGHLIGHTS | Everton v Brighton | Premier League",
+              "channel": "Official Brighton & Hove Albion FC",
+              "channelId": "UCf-cpC9WAdOsas19JHipukA",
+              "publishedAt": "2024-08-18T22:59:00Z",
+              "thumbnail": "https://i.ytimg.com/vi/VAPt38w6fQ4/hqdefault.jpg",
+              "description": "brightonandhovealbion #premierleague Watch all the extended action from Goodison Park, as goals from Welbeck, Adingra and ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "zM5jgaRKhfo",
+              "title": "Everton vs Brighton 0-3 HIGHLIGHTS | Premier League 24/25 | Round 1 | Video Game Simulation",
+              "channel": "PRINCE YT",
+              "channelId": "UC-1oWMDRyBIigjtY6sF3qMg",
+              "publishedAt": "2024-08-17T17:31:21Z",
+              "thumbnail": "https://i.ytimg.com/vi/zM5jgaRKhfo/hqdefault.jpg",
+              "description": "This video is a real simulation (gameplay) of the Everton vs Brighton match on the football game eFootball or EA FC. All submitted ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            },
+            {
+              "videoId": "PNSD5wcYR0k",
+              "title": "YOUNG RED CARD DISASTER! SUBS WERE TOO LATE! | EVERTON 0-3 BRIGHTON | EXTRA TIME MATCH REVIEW",
+              "channel": "The Toffee Blues - Everton Fan Channel",
+              "channelId": "UCXA0LotpeC2378UA_A6YLBA",
+              "publishedAt": "2024-08-19T19:45:07Z",
+              "thumbnail": "https://i.ytimg.com/vi/PNSD5wcYR0k/hqdefault.jpg",
+              "description": "Ollie brings you the final thoughts on the 3-0 defeat to Brighton at Goodison Go get your merch from The Toffee Blues store now; ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            },
+            {
+              "videoId": "RmFKAL8wfF8",
+              "title": "Everton vs Brighton 0-3 | 2024/25 Premier League | Match Highlights",
+              "channel": "GAMEEWORLD10",
+              "channelId": "UCHZaz2jaXA3lITbOYHWbQiw",
+              "publishedAt": "2024-08-17T18:47:11Z",
+              "thumbnail": "https://i.ytimg.com/vi/RmFKAL8wfF8/hqdefault.jpg",
+              "description": "Watch the thrilling match highlights between Everton and Brighton with a final score of 0-3 in the 2024/25 Premier League season.",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            }
+          ],
+          "videoCount": 5
+        },
+        {
+          "home": "Newcastle United",
+          "away": "Southampton",
+          "score": "1-0",
+          "date": "2024-08-17",
+          "videos": [
+            {
+              "videoId": "vFpLSQ6eJ6M",
+              "title": "Newcastle United v. Southampton | PREMIER LEAGUE HIGHLIGHTS | 8/17/2024 | NBC Sports",
+              "channel": "NBC Sports",
+              "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+              "publishedAt": "2024-08-17T16:34:17Z",
+              "thumbnail": "https://i.ytimg.com/vi/vFpLSQ6eJ6M/hqdefault.jpg",
+              "description": "Despite going down to 10 men in the first half, Newcastle managed to survive and outlast Southampton en route to a 1-0 victory at ...",
+              "isOfficial": true,
+              "geoBlocked": [
+                "GB",
+                "IE"
+              ],
+              "relevanceScore": 0.95
+            },
+            {
+              "videoId": "IDbPwA3pPbY",
+              "title": "Newcastle United 1 Southampton 0 | EXTENDED Premier League Highlights",
+              "channel": "Newcastle United",
+              "channelId": "UCywGl_BPp9QhD0uAcP2HsJw",
+              "publishedAt": "2024-08-17T23:00:09Z",
+              "thumbnail": "https://i.ytimg.com/vi/IDbPwA3pPbY/hqdefault.jpg",
+              "description": "Extended match action from our opening day victory against Southampton at St. James' Park!",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "nZ-TIr94NLc",
+              "title": "EXTENDED HIGHLIGHTS: Newcastle United 1-0 Southampton | Premier League",
+              "channel": "Southampton FC",
+              "channelId": "UCxvXjfiIHQ2O6saVx_ZFqnw",
+              "publishedAt": "2024-08-18T23:00:31Z",
+              "thumbnail": "https://i.ytimg.com/vi/nZ-TIr94NLc/hqdefault.jpg",
+              "description": "Watch our full highlights package from the Premier League match between Newcastle and Southampton, at St James' Park, ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "sP4yhqbqqyE",
+              "title": "MATCH CAM 🎥 Newcastle United 1 Southampton 0 | Behind The Scenes",
+              "channel": "Newcastle United",
+              "channelId": "UCywGl_BPp9QhD0uAcP2HsJw",
+              "publishedAt": "2024-08-18T19:10:42Z",
+              "thumbnail": "https://i.ytimg.com/vi/sP4yhqbqqyE/hqdefault.jpg",
+              "description": "Taking you closer to the action as Match Cam returns for the 2024/25 Premier League season as Newcastle United started the ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            },
+            {
+              "videoId": "-aQx2iAsyGA",
+              "title": "Newcastle United vs Southampton 1-0 | 2024 Premier League | Match Highlights | FabianSchar red card",
+              "channel": "GAMEEWORLD10",
+              "channelId": "UCHZaz2jaXA3lITbOYHWbQiw",
+              "publishedAt": "2024-08-18T11:37:13Z",
+              "thumbnail": "https://i.ytimg.com/vi/-aQx2iAsyGA/hqdefault.jpg",
+              "description": "Watch the exciting match highlights between Newcastle United and Southampton in the 2024/25 Premier League season.",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            }
+          ],
+          "videoCount": 5
+        },
+        {
+          "home": "Nottingham Forest",
+          "away": "Bournemouth",
+          "score": "1-1",
+          "date": "2024-08-17",
+          "videos": [
+            {
+              "videoId": "qNcL9CXsydM",
+              "title": "Nottingham Forest v. Bournemouth | PREMIER LEAGUE HIGHLIGHTS | 8/17/2024 | NBC Sports",
+              "channel": "NBC Sports",
+              "channelId": "UCqZQlzSHbVJrwrn5XvzrzcA",
+              "publishedAt": "2024-08-17T17:32:06Z",
+              "thumbnail": "https://i.ytimg.com/vi/qNcL9CXsydM/hqdefault.jpg",
+              "description": "Chris Wood got the City Ground rocking early in Nottingham Forest's favor, but a late Bournemouth equalizer was enough for the ...",
+              "isOfficial": true,
+              "geoBlocked": [
+                "GB",
+                "IE"
+              ],
+              "relevanceScore": 0.95
+            },
+            {
+              "videoId": "V7E91LecrT4",
+              "title": "Nottingham Forest 1-1 AFC Bournemouth | Extended Premier League Highlights 🎞️",
+              "channel": "Nottingham Forest FC ",
+              "channelId": "UCyAxjuAr8f_BFDGCO3Htbxw",
+              "publishedAt": "2024-08-18T23:00:13Z",
+              "thumbnail": "https://i.ytimg.com/vi/V7E91LecrT4/hqdefault.jpg",
+              "description": "Watch extended highlights from Forest's 1-1 draw against AFC Bournemouth in the Premier League. SUBSCRIBE NOW! Follow ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.8999999999999999
+            },
+            {
+              "videoId": "E69d4RcoqJs",
+              "title": "Nottingham Forest vs Bournemouth 1-1 | 2024/25 Premier League | Match Highlights",
+              "channel": "GAMEEWORLD10",
+              "channelId": "UCHZaz2jaXA3lITbOYHWbQiw",
+              "publishedAt": "2024-08-18T04:34:11Z",
+              "thumbnail": "https://i.ytimg.com/vi/E69d4RcoqJs/hqdefault.jpg",
+              "description": "Don't miss out on the intense match highlights between Nottingham Forest and Bournemouth in the 2024/25 Premier League ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.7999999999999999
+            },
+            {
+              "videoId": "wtCdvIjabWA",
+              "title": "Opening Day &amp; Sosa Presentation 🇵🇾 | Matchday Pass | Forest 1-1 Bournemouth",
+              "channel": "Nottingham Forest FC ",
+              "channelId": "UCyAxjuAr8f_BFDGCO3Htbxw",
+              "publishedAt": "2024-08-20T20:46:43Z",
+              "thumbnail": "https://i.ytimg.com/vi/wtCdvIjabWA/hqdefault.jpg",
+              "description": "Go behind the scenes of Forest's opening day draw against AFC Bournemouth in the Premier League. SUBSCRIBE NOW!",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.6
+            },
+            {
+              "videoId": "YFdqSSXWl_g",
+              "title": "Highlights &amp; Goles: Nottingham Forest vs. Bournemouth 1-1 | Premier League | Telemundo Deportes",
+              "channel": "Telemundo Deportes",
+              "channelId": "UCjZ7QPKb89R-4SxzBoceyOg",
+              "publishedAt": "2024-08-17T17:16:18Z",
+              "thumbnail": "https://i.ytimg.com/vi/YFdqSSXWl_g/hqdefault.jpg",
+              "description": "Video oficial de Telemundo Deportes. Los \"Cherries\" dejaron ir el triunfo en la Jornada 1 de la mejor liga del planeta, en casa de ...",
+              "isOfficial": false,
+              "geoBlocked": [],
+              "relevanceScore": 0.29999999999999993
+            }
+          ],
+          "videoCount": 5
+        }
+      ]
+    },
+    {
+      "gameweek": 2,
+      "dates": "24-25 August 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 3,
+      "dates": "31-01 September 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 4,
+      "dates": "14-15 September 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 5,
+      "dates": "21-22 September 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 6,
+      "dates": "28-30 September 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 7,
+      "dates": "05-06 October 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 8,
+      "dates": "19-21 October 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 9,
+      "dates": "25-27 October 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 10,
+      "dates": "02-04 November 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 11,
+      "dates": "09-10 November 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 12,
+      "dates": "23-25 November 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 13,
+      "dates": "29-01 December 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 14,
+      "dates": "03-05 December 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 15,
+      "dates": "07-12 February 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 16,
+      "dates": "14-16 December 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 17,
+      "dates": "21-22 December 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 18,
+      "dates": "26-27 December 2024",
+      "fixtures": []
+    },
+    {
+      "gameweek": 19,
+      "dates": "29-01 January 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 20,
+      "dates": "04-06 January 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 21,
+      "dates": "14-16 January 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 22,
+      "dates": "18-20 January 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 23,
+      "dates": "25-26 January 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 24,
+      "dates": "01-03 February 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 25,
+      "dates": "14-16 February 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 26,
+      "dates": "21-23 February 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 27,
+      "dates": "25-27 February 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 28,
+      "dates": "08-10 March 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 29,
+      "dates": "19-16 April 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 30,
+      "dates": "01-03 April 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 31,
+      "dates": "05-07 April 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 32,
+      "dates": "12-14 April 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 33,
+      "dates": "19-21 April 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 34,
+      "dates": "22-01 May 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 35,
+      "dates": "02-05 May 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 36,
+      "dates": "10-11 May 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 37,
+      "dates": "16-20 May 2025",
+      "fixtures": []
+    },
+    {
+      "gameweek": 38,
+      "dates": "25 May 2025",
+      "fixtures": []
+    }
+  ]
+}
