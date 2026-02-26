@@ -1858,7 +1858,7 @@
             try {
                 const [tableRes, fixturesRes] = await Promise.all([
                     fetch('data/2024-25-table.json'),
-                    fetch('data/2024-25-fixtures.json')
+                    fetch('data/2024-25-fixtures-full.json')
                 ]);
                 const tableData    = await tableRes.json();
                 const fixturesData = await fixturesRes.json();
