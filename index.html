@@ -2050,7 +2050,7 @@
             try {
                 const [tableRes, fixturesRes] = await Promise.all([
                     fetch('data/2024-25-table.json'),
-                    fetch('data/2024-25-fixtures-full.json')
+                    fetch('data/2024-25-fixtures-sky-enriched.json')
                 ]);
                 const tableData = await tableRes.json();
                 data = await fixturesRes.json();

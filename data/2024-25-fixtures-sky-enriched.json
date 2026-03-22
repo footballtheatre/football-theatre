@@ -7227,7 +7227,16 @@
           "home": "Nottingham Forest",
           "away": "Brighton",
           "score": "7-0",
-          "date": "2025-02-01"
+          "date": "2025-02-01",
+          "videos": [
+            {
+              "videoId": "RyzjKRshoEI",
+              "title": "Chris Wood bags hat-trick as Forest score SEVEN! | N.Forest 7-0 Brighton| EPL Highlights",
+              "channel": "Sky Sports",
+              "type": "official",
+              "geoBlocked": ["US", "CA"]
+            }
+          ]
         },
         {
           "home": "Newcastle United",
