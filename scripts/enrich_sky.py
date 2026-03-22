@@ -15,6 +15,7 @@ Usage:
 """
 
 import os
+import re
 import sys
 import json
 import time
@@ -85,6 +86,17 @@ TEAM_ALIASES: Dict[str, str] = {
 # Pre-sorted aliases: longest first so more specific names match before short ones.
 _SORTED_ALIASES = sorted(TEAM_ALIASES.keys(), key=len, reverse=True)
 
+_SCORE_RE = re.compile(r'\b(\d+)-(\d+)\b')
+
+
+def _find_team_in_text(text: str) -> Optional[str]:
+    """Return the canonical team name for the first alias found in text."""
+    text_lower = text.lower()
+    for alias in _SORTED_ALIASES:
+        if alias in text_lower:
+            return TEAM_ALIASES[alias]
+    return None
+
 
 def fetch_playlist_videos(youtube, playlist_id: str) -> List[Dict]:
     """Fetch all videos from a YouTube playlist, handling pagination."""
@@ -149,26 +161,33 @@ def fetch_playlist_videos(youtube, playlist_id: str) -> List[Dict]:
     return videos
 
 
-def extract_teams_from_title(title: str) -> Tuple[Optional[str], Optional[str]]:
+def extract_scoreline_from_title(title: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
     """
-    Scan a video title for two Premier League team names.
+    Parse the scoreline segment from a Sky Sports title.
 
-    Returns (canonical_team1, canonical_team2) in order of appearance,
-    or (None, None) if fewer than two teams are found.
+    Sky Sports format: "Description | HomeTeam SCORE AwayTeam | Competition"
+
+    Finds the pipe-delimited segment containing a score, then extracts the
+    team before the score (home) and the team after it (away).
+
+    Returns (home_canonical, score_str, away_canonical) or (None, None, None).
     """
-    title_lower = title.lower()
-    found: List[str] = []
+    for segment in title.split("|"):
+        m = _SCORE_RE.search(segment)
+        if not m:
+            continue
 
-    for alias in _SORTED_ALIASES:
-        canonical = TEAM_ALIASES[alias]
-        if canonical not in found and alias in title_lower:
-            found.append(canonical)
-        if len(found) == 2:
-            break
+        score_str = f"{m.group(1)}-{m.group(2)}"
+        before = segment[:m.start()]
+        after = segment[m.end():]
 
-    if len(found) >= 2:
-        return found[0], found[1]
-    return None, None
+        home = _find_team_in_text(before)
+        away = _find_team_in_text(after)
+
+        if home and away and home != away:
+            return home, score_str, away
+
+    return None, None, None
 
 
 def parse_date(date_str: str) -> Optional[date]:
@@ -182,12 +201,12 @@ def parse_date(date_str: str) -> Optional[date]:
         return None
 
 
-def build_fixture_index(gameweeks: List[Dict]) -> Dict[FrozenSet, List[Tuple[date, Dict]]]:
-    """Build a lookup dict: frozenset({home, away}) → list of (date, fixture)."""
-    index: Dict[FrozenSet, List[Tuple[date, Dict]]] = {}
+def build_fixture_index(gameweeks: List[Dict]) -> Dict[Tuple[str, str], List[Tuple[date, Dict]]]:
+    """Build a lookup dict: (home, away) → list of (date, fixture)."""
+    index: Dict[Tuple[str, str], List[Tuple[date, Dict]]] = {}
     for gw in gameweeks:
         for fixture in gw["fixtures"]:
-            key = frozenset([fixture["home"], fixture["away"]])
+            key = (fixture["home"], fixture["away"])
             fixture_date = parse_date(fixture.get("date", ""))
             if key not in index:
                 index[key] = []
@@ -196,23 +215,27 @@ def build_fixture_index(gameweeks: List[Dict]) -> Dict[FrozenSet, List[Tuple[dat
 
 
 def find_fixture(
-    index: Dict[FrozenSet, List[Tuple[date, Dict]]],
-    team1: str,
-    team2: str,
+    index: Dict[Tuple[str, str], List[Tuple[date, Dict]]],
+    home: str,
+    away: str,
+    score: str,
     published_at: str,
     window_days: int = 3,
 ) -> Optional[Dict]:
-    """Find the fixture for a team pair whose date is within window_days of the video publish date."""
-    key = frozenset([team1, team2])
-    candidates = index.get(key)
+    """
+    Find the fixture matching (home, away, score) whose date is within
+    window_days of the video publish date.
+    """
+    candidates = index.get((home, away))
     if not candidates:
         return None
 
     video_date = parse_date(published_at)
 
     for fixture_date, fixture in candidates:
+        if fixture.get("score") != score:
+            continue
         if video_date is None or fixture_date is None:
-            # Can't date-match — fall back to first candidate
             return fixture
         if abs((video_date - fixture_date).days) <= window_days:
             return fixture
@@ -242,12 +265,12 @@ def main() -> None:
     unmatched: List[str] = []
 
     for video in videos:
-        team1, team2 = extract_teams_from_title(video["title"])
-        if not team1 or not team2:
+        home, score, away = extract_scoreline_from_title(video["title"])
+        if not home or not away:
             unmatched.append(video["title"])
             continue
 
-        fixture = find_fixture(fixture_index, team1, team2, video["publishedAt"])
+        fixture = find_fixture(fixture_index, home, away, score, video["publishedAt"])
         if fixture is None:
             unmatched.append(video["title"])
             continue
