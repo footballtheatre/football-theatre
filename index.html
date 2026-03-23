@@ -1816,7 +1816,7 @@
                     const matchLabel = `${fx.home} v ${fx.away} (${fx.score}) — ${fx.date}`;
                     const season = data.season;
 
-                    const dateStr = new Date(fx.date).toLocaleDateString('en-GB', {
+                    const dateStr = new Date(fx.date + 'T00:00:00').toLocaleDateString('en-GB', {
                         weekday: 'long', day: 'numeric', month: 'long'
                     });
 
@@ -1943,7 +1943,7 @@
             document.getElementById('theatre-away').textContent  = away;
             document.getElementById('theatre-score').textContent = score;
             document.getElementById('theatre-meta').textContent  =
-                new Date(date).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+                new Date(date + 'T00:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
             loadTheatreVideo(videoIdx);
             buildSourceSwitcher();
