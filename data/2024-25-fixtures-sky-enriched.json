@@ -642,7 +642,19 @@
           "home": "Chelsea",
           "away": "Crystal Palace",
           "score": "1-1",
-          "date": "2024-09-01"
+          "date": "2024-09-01",
+          "videos": [
+            {
+              "videoId": "SVaBrM8pRak",
+              "title": "Eze strikes to help Palace halt Chelsea! ✋| Chelsea 1-1 Crystal Palace | Premier League Highlights",
+              "channel": "Sky Sports",
+              "type": "official",
+              "geoBlocked": [
+                "US",
+                "CA"
+              ]
+            }
+          ]
         },
         {
           "home": "Newcastle United",
@@ -1218,7 +1230,19 @@
           "home": "Brentford",
           "away": "West Ham",
           "score": "1-1",
-          "date": "2024-09-28"
+          "date": "2024-09-28",
+          "videos": [
+            {
+              "videoId": "NkyNTAbc3Gw",
+              "title": "Mbuemo scores after 38 seconds but Hammers grab point! | Brentford 1-1 West Ham | EPL Highlights",
+              "channel": "Sky Sports",
+              "type": "official",
+              "geoBlocked": [
+                "US",
+                "CA"
+              ]
+            }
+          ]
         },
         {
           "home": "Chelsea",
@@ -2450,7 +2474,19 @@
           "home": "Liverpool",
           "away": "Aston Villa",
           "score": "2-0",
-          "date": "2024-11-09"
+          "date": "2024-11-09",
+          "videos": [
+            {
+              "videoId": "QcjSJtO-P2Q",
+              "title": "Liverpool go five points clear at the top | Liverpool 2-0 Aston Villa | Premier League Highlights",
+              "channel": "Sky Sports",
+              "type": "official",
+              "geoBlocked": [
+                "US",
+                "CA"
+              ]
+            }
+          ]
         },
         {
           "home": "Manchester United",
@@ -2577,7 +2613,19 @@
           "home": "Bournemouth",
           "away": "Brighton",
           "score": "1-2",
-          "date": "2024-11-23"
+          "date": "2024-11-23",
+          "videos": [
+            {
+              "videoId": "cfI6mHQE2To",
+              "title": "Clinical Brighton hold on against Cherries after red! | Bournemouth 1-2 Brighton | EPL Highlights",
+              "channel": "Sky Sports",
+              "type": "official",
+              "geoBlocked": [
+                "US",
+                "CA"
+              ]
+            }
+          ]
         },
         {
           "home": "Arsenal",
